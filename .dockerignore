@@ -1,0 +1,10 @@
+**/minishell
+
+**/build/
+**/obj/
+
+libft/libft.a
+
+Dockerfile
+start.sh
+README.md
