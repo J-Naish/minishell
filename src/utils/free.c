@@ -1,18 +1,18 @@
 #include "../../include/utils.h"
 
-void	free_str_arr(t_str_arr_heap strarr)
+void	free_str_arr(t_str_arr_heap str_arr)
 {
 	int	i;
 
-	if (!strarr)
+	if (!str_arr)
 		return ;
 	i = 0;
-	while (strarr[i])
+	while (str_arr[i])
 	{
-		free(strarr[i]);
+		free(str_arr[i]);
 		i++;
 	}
-	free(strarr);
+	free(str_arr);
 }
 
 void	free_command(t_command *command)

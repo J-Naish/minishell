@@ -13,7 +13,7 @@ void	memory_allocation_failed(void);
  * 
  * @param strarr ヒープ領域の文字列配列
  */
-void	free_str_arr(t_str_arr_heap strarr);
+void	free_str_arr(t_str_arr_heap str_arr);
 
 /**
  * @brief t_command型のオブジェクトを完全に解放する関数

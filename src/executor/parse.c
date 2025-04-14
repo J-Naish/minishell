@@ -2,65 +2,51 @@
 
 // 文字列配列を作る関数
 // クオートがあればそれをひとまとまりの文字列とみなす
-// echo    cdskcds cmdsj "  mcsl   mcslds" scdcs     
+// echo    cdskcds cmdsj "  mcsl   mcslds" scdcs
 // => ["echo", "cdskcds", "cmdsj", "  mcsl   mcslds", "scdcs"]
 // スペース(タブ等含む)の数+クオートのセット(クオート内のクオートは無視)
 // 閉じられてない文字列をどう扱うか
 // 不正なクオートはexit
+// おそらくシンプルにクオートを取り除くだけ
 
-static bool	is_space(char c)
+// addする関数作ればいいかも
+// 無効なクオートは全て弾く
+static t_str_arr_heap	append_str(t_str_arr_heap str_arr, const t_str str)
 {
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
-
-static size_t	temp(t_str_heap prompt)
-{
-	size_t	i;
-	size_t	size;
+	int				i;
+	t_str_arr_heap	appended;
 
 	i = 0;
-	size = 0;
-	while (is_space(prompt[i]))
+	while (str_arr[i])
 		i++;
-	while (prompt[i])
+	appended = (t_str_arr_heap)malloc(sizeof(t_str) * (i + 2));
+	if (!appended)
+		return (NULL);
+	i = 0;
+	while (str_arr[i])
 	{
-		if (is_space(prompt[i]))
-		{
-			size += 1;
-			while (is_space(prompt[i]))
-				i++;
-		}
-		else if (prompt[i] == '\"')
-		{
-			i++;
-			while (prompt[i] && !prompt[i] == '\"')
-			{
-				if (!prompt[i])
-					return (size);
-				i++;
-			}
-			size += 1;
-		}
-		else if (prompt[i] == '\'')
-		{
-			i++;
-			while (prompt[i] && !prompt[i] == '\'')
-			{
-				if (!prompt[i])
-					return (size);
-				i++;
-			}
-			size += 1;
-		}
-		else
-			i++;
+		appended[i] = ft_strdup(str_arr[i]);
+		if (!appended[i])
+			return (free_str_arr(appended), free_str_arr(str_arr), NULL);
+		i++;
 	}
-	if (is_space(prompt[i - 1]))
-		size -= 1;
-	return (size + 1);
+	appended[i] = ft_strdup(str);
+	if (!appended[i])
+		return (free_str_arr(appended), free_str_arr(str_arr), NULL);
+	appended[i + 1] = NULL;
+	free_str_arr(str_arr);
+	return (appended);
 }
 
-// static t_str_arr_heap	split_prompt(t_str prompt)
-// {
-
+// int main() {
+// 	char **str_arr = malloc(sizeof(char *) * 3);
+// 	str_arr[0] = ft_strdup("Lorem");
+// 	str_arr[1] = ft_strdup("ipsum");
+// 	str_arr[2] = NULL;
+// 	print_str_arr(str_arr);
+// 	printf("\nappend str\n\n");
+// 	str_arr = append_str(str_arr, "dollar");
+// 	print_str_arr(str_arr);
+// 	free_str_arr(str_arr);
+// 	return 0;
 // }

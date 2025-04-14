@@ -6,6 +6,7 @@ SRC := src/builtins/echo.c\
 		src/debug/bool.c\
 		src/debug/str_arr.c\
 		src/executor/executor.c\
+		src/executor/parse.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
 		src/utils/string.c\
@@ -22,6 +23,13 @@ BUILD_DIR := build
 BUILD := $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))
 LIBFT_DIR := libft
 LIBFT := ./$(LIBFT_DIR)/libft.a
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+	LEAK_CHECK = valgrind --leak-check=full --show-leak-kinds=all
+endif
+ifeq ($(UNAME_S), Darwin)
+	LEAK_CHECK = leaks --atExit --
+endif
 
 .PHONY: all clean fclean re submit
 
@@ -48,7 +56,7 @@ re: fclean all
 unit-test: $(TEST_SRC)
 	@make all -C $(LIBFT_DIR)
 	@$(CC) $(CFLAGS) $(TEST_SRC) $(LIBFT)
-	@./a.out
+	@$(LEAK_CHECK) ./a.out
 	@rm -f a.out
 
 -include $(BUILD:.o=.d)
