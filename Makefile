@@ -8,7 +8,7 @@ SRC := src/builtins/echo.c\
 		src/executor/executor.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
-		src/utils/is_same_str.c\
+		src/utils/string.c\
 		src/main.c
 HEADERS = include/builtins.h\
 			include/constants.h\
