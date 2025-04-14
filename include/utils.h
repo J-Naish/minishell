@@ -30,4 +30,13 @@ void	free_command(t_command *command);
  */
 bool	is_same_str(const char *s1, const char *s2);
 
+/**
+ * @brief シェル上で特別な意味を持つ文字かどうか判別する関数
+ * 
+ * @return `|`, `&`, `>`, `<`であればtrue、それ以外はfalse
+ * 
+ * @param c 判別したい文字
+ */
+bool	is_special_char(char c);
+
 #endif

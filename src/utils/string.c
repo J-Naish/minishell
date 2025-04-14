@@ -15,12 +15,26 @@ bool	is_same_str(const char *s1, const char *s2)
 		return (false);
 }
 
-// int main() {
-// 	print_bool((is_same_str("test", "test")));
-// 	print_bool((is_same_str("test1", "test")));
-// 	print_bool((is_same_str("test", "test ")));
-// 	print_bool((is_same_str("", "test")));
-// 	print_bool((is_same_str("tst", "t e s t")));
-// 	print_bool((is_same_str("t e s t", "test")));
-// 	print_bool((is_same_str(NULL, "test")));
-// }
+bool	is_special_char(char c)
+{
+	if (c == '|' || c == '&' || c == '>' || c == '<')
+		return (true);
+	else
+		return (false);
+}
+
+int main() {
+	print_bool((is_same_str("test", "test")));
+	print_bool((is_same_str("test1", "test")));
+	print_bool((is_same_str("test", "test ")));
+	print_bool((is_same_str("", "test")));
+	print_bool((is_same_str("tst", "t e s t")));
+	print_bool((is_same_str("t e s t", "test")));
+	print_bool((is_same_str(NULL, "test")));
+	print_bool((is_special_char('|')));
+	print_bool((is_special_char('&')));
+	print_bool((is_special_char('>')));
+	print_bool((is_special_char('<')));
+	print_bool((is_special_char('a')));
+	print_bool((is_special_char('0')));
+}
