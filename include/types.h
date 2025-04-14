@@ -22,6 +22,11 @@ typedef char*	t_str;
  */
 typedef char**	t_str_arr_heap;
 
+/**
+ * @brief char **のエイリアスです
+ */
+typedef char**	t_str_arr;
+
 typedef struct s_command
 {
 	t_str_heap		raw_prompt;
