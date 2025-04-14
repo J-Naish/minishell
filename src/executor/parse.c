@@ -6,13 +6,14 @@
 // => ["echo", "cdskcds", "cmdsj", "  mcsl   mcslds", "scdcs"]
 // スペース(タブ等含む)の数+クオートのセット(クオート内のクオートは無視)
 // 閉じられてない文字列をどう扱うか
+// 不正なクオートはexit
 
 static bool	is_space(char c)
 {
 	return (c == ' ' || (c >= 9 && c <= 13));
 }
 
-static size_t	temp(t_str prompt)
+static size_t	temp(t_str_heap prompt)
 {
 	size_t	i;
 	size_t	size;
@@ -63,7 +64,3 @@ static size_t	temp(t_str prompt)
 // {
 
 // }
-
-
-// 文字列配列の配列を作る関数(char3次元配列)
-// [["echo", "hello, world", null], ["&&", null], ["ls", null], null]
