@@ -31,6 +31,8 @@ bool	is_special_char(char c)
 // 	print_bool((is_same_str("tst", "t e s t")));
 // 	print_bool((is_same_str("t e s t", "test")));
 // 	print_bool((is_same_str(NULL, "test")));
+// }
+// int main() {
 // 	print_bool((is_special_char('|')));
 // 	print_bool((is_special_char('&')));
 // 	print_bool((is_special_char('>')));
