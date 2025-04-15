@@ -29,7 +29,7 @@ ifeq ($(UNAME_S), Linux)
 	LEAK_CHECK = valgrind --leak-check=full --show-leak-kinds=all
 endif
 ifeq ($(UNAME_S), Darwin)
-	LEAK_CHECK = leaks --atExit --
+	LEAK_CHECK = leaks -quiet --atExit --
 endif
 
 .PHONY: all clean fclean re submit
