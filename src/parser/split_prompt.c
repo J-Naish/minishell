@@ -32,21 +32,21 @@ static int	next_quote_index(t_str_heap prompt, char quote)
 	return (i);
 }
 
-static int	next_space_index(t_str_heap prompt)
+static int	next_index(t_str_heap prompt)
 {
 	int	i;
 
 	i = 0;
 	while (prompt[i])
 	{
-		if (is_space(prompt[i]))
+		if (is_space(prompt[i]) || is_special_char(prompt[i]))
 			break ;
 		i++;
 	}
 	return (i);
 }
 
-// 特殊文字のハンドリングを追加: |, &, <, >
+// ">>"と>>が区別つかない
 t_str_arr_heap	split_prompt(t_str_heap prompt)
 {
 	t_str_arr_heap	str_arr;
@@ -85,9 +85,19 @@ t_str_arr_heap	split_prompt(t_str_heap prompt)
 			i++;
 			continue ;
 		}
+		else if (is_special_char(prompt[i]))
+		{
+			length = 1;
+			if (prompt[i] == prompt[i + 1])
+				length += 1;
+			temp = extract_str(&prompt[i], length);
+			str_arr = append_str(str_arr, temp);
+			free(temp);
+			i += length;
+		}
 		else
 		{
-			length = next_space_index(&prompt[i]);
+			length = next_index(&prompt[i]);
 			temp = extract_str(&prompt[i], length);
 			str_arr = append_str(str_arr, temp);
 			free(temp);
@@ -112,6 +122,15 @@ t_str_arr_heap	split_prompt(t_str_heap prompt)
 // 	print_str_arr(test);
 // 	free_str_arr(test);
 // 	test = split_prompt("echo	\n 'hello	world'    a	");
+// 	print_str_arr(test);
+// 	free_str_arr(test);
+// 	test = split_prompt("echo||hello");
+// 	print_str_arr(test);
+// 	free_str_arr(test);
+// 	test = split_prompt("echo|&hello");
+// 	print_str_arr(test);
+// 	free_str_arr(test);
+// 	test = split_prompt("echo|&hello");
 // 	print_str_arr(test);
 // 	free_str_arr(test);
 // }
