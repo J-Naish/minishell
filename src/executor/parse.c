@@ -1,16 +1,5 @@
 #include "../../include/executor.h"
 
-// 文字列配列を作る関数
-// クオートがあればそれをひとまとまりの文字列とみなす
-// echo    cdskcds cmdsj "  mcsl   mcslds" scdcs
-// => ["echo", "cdskcds", "cmdsj", "  mcsl   mcslds", "scdcs"]
-// スペース(タブ等含む)の数+クオートのセット(クオート内のクオートは無視)
-// 閉じられてない文字列をどう扱うか
-// 不正なクオートはexit
-// おそらくシンプルにクオートを取り除くだけ
-
-// addする関数作ればいいかも
-// 無効なクオートは全て弾く
 static t_str_arr_heap	append_str(t_str_arr_heap str_arr, const t_str str)
 {
 	int				i;
@@ -38,6 +27,37 @@ static t_str_arr_heap	append_str(t_str_arr_heap str_arr, const t_str str)
 	return (appended);
 }
 
+static bool	is_unclosed_quote(const char **prompt_ptr, char quote)
+{
+	(*prompt_ptr)++;
+	while (**prompt_ptr && **prompt_ptr != quote)
+		(*prompt_ptr)++;
+	if (!**prompt_ptr)
+		return (true);
+	return (false);
+}
+
+static bool	has_invalid_quote(const char *prompt)
+{
+	if (!ft_strchr(prompt, '\'') && !ft_strchr(prompt, '\"'))
+		return (false);
+	while (*prompt)
+	{
+		if (*prompt == '\'')
+		{
+			if (is_unclosed_quote(&prompt, '\''))
+				return (true);
+		}
+		else if (*prompt == '\"')
+		{
+			if (is_unclosed_quote(&prompt, '\"'))
+				return (true);
+		}
+		prompt++;
+	}
+	return (false);
+}
+
 // int main() {
 // 	char **str_arr = malloc(sizeof(char *) * 3);
 // 	str_arr[0] = ft_strdup("Lorem");
@@ -49,4 +69,14 @@ static t_str_arr_heap	append_str(t_str_arr_heap str_arr, const t_str str)
 // 	print_str_arr(str_arr);
 // 	free_str_arr(str_arr);
 // 	return 0;
+// }
+// int main() {
+// 	print_bool(has_invalid_quote("'test")); // true: invalid
+// 	print_bool(has_invalid_quote("'test'")); // false: valid
+// 	print_bool(has_invalid_quote("'te'st")); // false: valid
+// 	print_bool(has_invalid_quote("'test\"")); // true: invalid
+// 	print_bool(has_invalid_quote("\"test\"")); // false: valid
+// 	print_bool(has_invalid_quote("'t\"est'")); // false: valid
+// 	print_bool(has_invalid_quote("'t\"est'\"")); // true: invalid
+// 	print_bool(has_invalid_quote("test")); // false: valid
 // }
