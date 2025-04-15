@@ -6,7 +6,8 @@ SRC := src/builtins/echo.c\
 		src/debug/bool.c\
 		src/debug/str_arr.c\
 		src/executor/executor.c\
-		src/executor/parse.c\
+		src/parser/helpers.c\
+		src/parser/split_prompt.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
 		src/utils/string.c\
