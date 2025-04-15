@@ -39,4 +39,13 @@ bool	is_same_str(const char *s1, const char *s2);
  */
 bool	is_special_char(char c);
 
+/**
+ * @brief 空白に相当する文字かどうか判別する関数
+ * 
+ * @return true | false
+ * 
+ * @param c 判別したい文字
+ */
+bool	is_space(char c);
+
 #endif
