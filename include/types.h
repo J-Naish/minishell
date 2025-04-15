@@ -27,6 +27,19 @@ typedef char**	t_str_arr_heap;
  */
 typedef char**	t_str_arr;
 
+typedef enum e_token_type
+{
+	WORD,
+	REDIRECT,
+	CHAIN
+}	t_token_type;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	t_str_heap		value;
+}	t_token;
+
 typedef struct s_command
 {
 	t_str_heap		raw_prompt;
