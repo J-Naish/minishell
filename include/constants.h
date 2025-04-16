@@ -44,6 +44,10 @@
 #  define MAGENTA "\033[35m"
 # endif
 
+# ifndef BLACK
+#  define BLACK "\033[30m"
+# endif
+
 # ifndef RESET
 #  define RESET "\033[0m"
 # endif
