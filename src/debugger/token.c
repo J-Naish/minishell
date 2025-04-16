@@ -26,7 +26,6 @@ void	print_token(t_token token)
 
 // int main() {
 // 	t_token	token;
-
 // 	token.value = "test";
 // 	token.type = REDIRECT;
 // 	print_token(token);
