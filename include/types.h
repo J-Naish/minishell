@@ -73,6 +73,7 @@ typedef struct s_command
 	t_str_heap		output_file;
 	bool			append_output;
 	t_str_heap		heredoc;
+	t_str_heap		delimiter;
 }	t_command;
 
 typedef enum e_chain_operator

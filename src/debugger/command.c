@@ -23,6 +23,9 @@ void	print_command(t_command *command)
 	ft_putstr_fd(",\n", STDOUT_FILENO);
 	ft_putstr_fd("  heredoc      : ", STDOUT_FILENO);
 	print_str(command->heredoc);
+	ft_putstr_fd(",\n", STDOUT_FILENO);
+	ft_putstr_fd("  delimiter    : ", STDOUT_FILENO);
+	print_str(command->delimiter);
 	ft_putstr_fd("\n}\n", STDOUT_FILENO);
 }
 
@@ -50,6 +53,7 @@ void	print_command(t_command *command)
 //     char *args4[] = {"cat", NULL};
 //     cmd4.args = args4;
 //     cmd4.heredoc = "This is a\nheredoc content\nwith multiple lines.";
+// 	cmd4.delimiter = "EOF";
 //     print_command(&cmd4);
 // 	// test case 5
 // 	t_command cmd5 = {0};
