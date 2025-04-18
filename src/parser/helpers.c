@@ -31,66 +31,48 @@ bool	has_invalid_quote(t_str_heap prompt)
 	return (false);
 }
 
-t_str_arr_heap	append_str(t_str_arr_heap str_arr, const t_str str)
+t_str_heap	extract_str(t_str_heap prompt, int length)
 {
-	int				i;
-	t_str_arr_heap	appended;
+	t_str_heap	str;
+	int			i;
 
-	i = 0;
-	while (str_arr[i])
-		i++;
-	appended = (t_str_arr_heap)malloc(sizeof(t_str) * (i + 2));
-	if (!appended)
+	str = (t_str_heap)malloc(sizeof(char) * (length + 1));
+	if (!str)
 		return (NULL);
 	i = 0;
-	while (str_arr[i])
+	while (i < length && prompt[i])
 	{
-		appended[i] = ft_strdup(str_arr[i]);
-		if (!appended[i])
-			return (free_str_arr(appended), free_str_arr(str_arr), NULL);
+		str[i] = prompt[i];
 		i++;
 	}
-	appended[i] = ft_strdup(str);
-	if (!appended[i])
-		return (free_str_arr(appended), free_str_arr(str_arr), NULL);
-	appended[i + 1] = NULL;
-	free_str_arr(str_arr);
-	return (appended);
+	str[i] = '\0';
+	return (str);
 }
 
-t_str_arr_heap	init_str_arr(void)
+int	next_quote_index(t_str_heap prompt, char quote)
 {
-	t_str_arr_heap	str_arr;
+	int	i;
 
-	str_arr = (t_str_arr_heap)malloc(sizeof(t_str) * 1);
-	if (!str_arr)
-		return (NULL);
-	str_arr[0] = NULL;
-	return (str_arr);
+	i = 0;
+	while (prompt[i])
+	{
+		if (prompt[i] == quote)
+			break ;
+		i++;
+	}
+	return (i);
 }
 
-// int main() {
-// 	print_bool(has_invalid_quote("'test")); // true: invalid
-// 	print_bool(has_invalid_quote("'test'")); // false: valid
-// 	print_bool(has_invalid_quote("'te'st")); // false: valid
-// 	print_bool(has_invalid_quote("'test\"")); // true: invalid
-// 	print_bool(has_invalid_quote("\"test\"")); // false: valid
-// 	print_bool(has_invalid_quote("'t\"est'")); // false: valid
-// 	print_bool(has_invalid_quote("'t\"est'\"")); // true: invalid
-// 	print_bool(has_invalid_quote("test")); // false: valid
-// }
-// int main() {
-// 	char **str_arr = malloc(sizeof(char *) * 3);
-// 	str_arr[0] = ft_strdup("Lorem");
-// 	str_arr[1] = ft_strdup("ipsum");
-// 	str_arr[2] = NULL;
-// 	print_str_arr(str_arr);
-// 	printf("\nappend str\n\n");
-// 	str_arr = append_str(str_arr, "dollar");
-// 	print_str_arr(str_arr);
-// 	free_str_arr(str_arr);
-// 	return 0;
-// }
-// int main() {
-// 	print_str_arr(init_str_arr());
-// }
+int	next_index(t_str_heap prompt)
+{
+	int	i;
+
+	i = 0;
+	while (prompt[i])
+	{
+		if (is_space(prompt[i]) || is_special_char(prompt[i]))
+			break ;
+		i++;
+	}
+	return (i);
+}

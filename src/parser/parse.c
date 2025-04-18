@@ -1,103 +1,73 @@
 #include "../../include/parser.h"
 
-static t_str_heap	extract_str(t_str_heap prompt, int length)
+static void	handle_quote(t_token ***tokens,
+	t_str_heap prompt, int *i, char quote)
 {
-	t_str_heap	str;
-	int			i;
+	int			length;
+	t_str_heap	temp;
 
-	str = (t_str_heap)malloc(sizeof(char) * (length + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < length && prompt[i])
-	{
-		str[i] = prompt[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	(*i)++;
+	length = next_quote_index(&prompt[*i], quote);
+	temp = extract_str(&prompt[*i], length);
+	*tokens = append_token(*tokens, temp, WORD);
+	free(temp);
+	*i += length + 1;
 }
 
-static int	next_quote_index(t_str_heap prompt, char quote)
+static void	handle_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 {
-	int	i;
+	int				length;
+	t_str_heap		temp;
+	t_token_type	type;
 
-	i = 0;
-	while (prompt[i])
-	{
-		if (prompt[i] == quote)
-			break ;
-		i++;
-	}
-	return (i);
+	length = 1;
+	if (prompt[*i] == prompt[*i + 1])
+		length += 1;
+	if (prompt[*i] == '&')
+		type = CHAIN;
+	else if (prompt[*i] == '|' && prompt[*i + 1] == '|')
+		type = CHAIN;
+	else
+		type = REDIRECT;
+	temp = extract_str(&prompt[*i], length);
+	*tokens = append_token(*tokens, temp, type);
+	free(temp);
+	*i += length;
 }
 
-static int	next_index(t_str_heap prompt)
+static void	handle_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 {
-	int	i;
+	int			length;
+	t_str_heap	temp;
 
-	i = 0;
-	while (prompt[i])
-	{
-		if (is_space(prompt[i]) || is_special_char(prompt[i]))
-			break ;
-		i++;
-	}
-	return (i);
+	length = next_index(&prompt[*i]);
+	temp = extract_str(&prompt[*i], length);
+	*tokens = append_token(*tokens, temp, WORD);
+	free(temp);
+	*i += length;
 }
 
 t_token	**parse_prompt(t_str_heap prompt)
 {
 	t_token		**tokens;
-	t_str_heap	temp;
 	int			i;
-	int			length;
 
 	tokens = init_tokens();
+	if (!tokens)
+		return (NULL);
 	i = 0;
 	while (prompt[i])
 	{
 		if (is_space(prompt[i]))
-		{
 			i++;
-			continue ;
-		}
 		else if (prompt[i] == '\'')
-		{
-			i++;
-			length = next_quote_index(&prompt[i], '\'');
-			temp = extract_str(&prompt[i], length);
-			tokens = append_token(tokens, temp, WORD);
-			free(temp);
-			i += length + 1;
-		}
+			handle_quote(&tokens, prompt, &i, '\'');
 		else if (prompt[i] == '\"')
-		{
-			i++;
-			length = next_quote_index(&prompt[i], '\"');
-			temp = extract_str(&prompt[i], length);
-			tokens = append_token(tokens, temp, WORD);
-			free(temp);
-			i += length + 1;
-		}
+			handle_quote(&tokens, prompt, &i, '\"');
 		else if (is_special_char(prompt[i]))
-		{
-			length = 1;
-			if (prompt[i] == prompt[i + 1])
-				length += 1;
-			temp = extract_str(&prompt[i], length);
-			tokens = append_token(tokens, temp, CHAIN);
-			free(temp);
-			i += length;
-		}
+			handle_special_char(&tokens, prompt, &i);
 		else
-		{
-			length = next_index(&prompt[i]);
-			temp = extract_str(&prompt[i], length);
-			tokens = append_token(tokens, temp, WORD);
-			free(temp);
-			i += length;
-		}
+			handle_regular_word(&tokens, prompt, &i);
 	}
 	return (tokens);
 }
