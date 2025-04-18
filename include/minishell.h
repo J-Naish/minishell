@@ -18,11 +18,11 @@
 # include <curses.h>
 # include <limits.h>
 # include "../libft/libft.h"
+# include "./types.h"
 # include "./builtins.h"
 # include "./constants.h"
 # include "./debugger.h"
 # include "./executor.h"
-# include "./types.h"
 # include "./utils.h"
 
 extern t_signal	g_signal;
