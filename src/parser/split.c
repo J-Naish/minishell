@@ -47,7 +47,7 @@ static void	handle_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 	*i += length;
 }
 
-t_token	**parse_prompt(t_str_heap prompt)
+t_token	**split_prompt(t_str_heap prompt)
 {
 	t_token		**tokens;
 	int			i;
@@ -74,28 +74,28 @@ t_token	**parse_prompt(t_str_heap prompt)
 
 // int main() {
 // 	t_token **test;
-// 	test = parse_prompt("echo hello world");
+// 	test = split_prompt("echo hello world");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo \"hello world\"");
+// 	test = split_prompt("echo \"hello world\"");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo 'hello world'");
+// 	test = split_prompt("echo 'hello world'");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo \"it's a test\" 'of split command'");
+// 	test = split_prompt("echo \"it's a test\" 'of split command'");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo	\n 'hello	world'    a	");
+// 	test = split_prompt("echo	\n 'hello	world'    a	");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo||hello");
+// 	test = split_prompt("echo||hello");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo|&hello");
+// 	test = split_prompt("echo|&hello");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = parse_prompt("echo|&hello");
+// 	test = split_prompt("echo|&hello");
 // 	print_tokens(test);
 // 	free_tokens(test);
 // }
