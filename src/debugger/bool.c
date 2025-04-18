@@ -10,7 +10,7 @@ t_str	bool_to_str(bool b)
 
 void	print_bool(bool b)
 {
-	printf("%s\n", bool_to_str(b));
+	ft_putstr_fd(bool_to_str(b), STDOUT_FILENO);
 }
 
 // int main() {

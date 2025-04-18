@@ -18,7 +18,7 @@ void	print_str_arr(const t_str_arr str_arr)
 		i++;
 	}
 	print_str(str_arr[i]);
-	ft_putstr_fd(" ]\n", STDOUT_FILENO);
+	ft_putstr_fd(" ]", STDOUT_FILENO);
 }
 
 // int main() {
