@@ -1,6 +1,6 @@
 #include "../../include/debugger.h"
 
-t_str	bool_to_str(bool b)
+static t_str	bool_to_str(bool b)
 {
 	if (b)
 		return (YELLOW"true"RESET);
@@ -14,6 +14,12 @@ void	print_bool(bool b)
 }
 
 // int main() {
-// 	printf("true is %s\n", bool_to_str(true));
-// 	printf("false is %s\n", bool_to_str(false));
+// 	print_bool(true);
+// 	printf("\n");
+// 	print_bool(false);
+// 	printf("\n");
+// 	print_bool(0);
+// 	printf("\n");
+// 	print_bool(10);
+// 	printf("\n");
 // }
