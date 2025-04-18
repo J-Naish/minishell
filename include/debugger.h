@@ -3,6 +3,8 @@
 
 # include "./minishell.h"
 
+void	print_str(const t_str str);
+
 /**
  * @brief 文字列の配列を出力する関数
  * 
