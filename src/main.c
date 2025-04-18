@@ -17,7 +17,6 @@ int	main(void)
 		prompt = readline(SHELL_NAME"$ ");
 		if (prompt && *prompt)
 			add_history(prompt);
-		execute_prompt(prompt);
 		rl_on_new_line();
 	}
 	return (EXIT_SUCCESS);

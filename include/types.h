@@ -27,6 +27,15 @@ typedef char**	t_str_arr_heap;
  */
 typedef char**	t_str_arr;
 
+/**
+ * @brief トークンの属性を表す列挙型
+ * 
+ * @param WORD コマンド、コマンドのフラグ、コマンドの引数
+ * 
+ * @param REDIRECT |, >, <, >>, <<などのリダイレクト
+ * 
+ * @param CHAIN ||, &&などのチェイン
+ */
 typedef enum e_token_type
 {
 	WORD,
@@ -34,17 +43,17 @@ typedef enum e_token_type
 	CHAIN
 }	t_token_type;
 
+/**
+ * @brief プロンプトを分割した際の単位
+ * 
+ * @param type トークンの属性
+ * 
+ * @param value 文字列
+ */
 typedef struct s_token
 {
 	t_token_type	type;
 	t_str_heap		value;
 }	t_token;
-
-typedef struct s_command
-{
-	t_str_heap		raw_prompt;
-	t_str_arr_heap	args;
-}	t_command;
-
 
 #endif

@@ -4,10 +4,6 @@
 # include "./minishell.h"
 # include "./types.h"
 
-void	cmd_echo(t_command *command);
-
-void	cmd_exit(t_command *command);
-
 bool	is_builtin(t_token *token);
 
 #endif

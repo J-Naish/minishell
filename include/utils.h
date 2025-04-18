@@ -8,13 +8,6 @@ void	unable_to_execute(const t_str file_path);
 void	system_error(void);
 void	memory_allocation_failed(void);
 
-/**
- * @brief 文字列配列を解放する関数
- * 
- * @param strarr ヒープ領域の文字列配列
- */
-void	free_str_arr(t_str_arr_heap str_arr);
-
 void	free_tokens(t_token **tokens);
 
 /**
