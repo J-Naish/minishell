@@ -1,6 +1,9 @@
 #ifndef TYPES_H
 # define TYPES_H
 
+# include <stdbool.h>
+# include "./minishell.h"
+
 /**
  * @brief シグナルやステータスを保持するためのグローバル変数の型
  */
@@ -84,7 +87,7 @@ typedef struct s_pipeline
 	t_command			**commands;
 	int					command_count;
 	t_chain_operator	operator;
-	t_pipeline			*next;
+	struct s_pipeline	*next;
 }	t_pipeline;
 
 #endif
