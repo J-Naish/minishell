@@ -26,6 +26,5 @@
 # include "./types.h"
 # include "./utils.h"
 
-extern t_signal	g_signal;
 
 #endif
