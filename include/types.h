@@ -2,7 +2,6 @@
 # define TYPES_H
 
 # include <stdbool.h>
-# include "./minishell.h"
 
 /**
  * @brief シグナルやステータスを保持するためのグローバル変数の型
