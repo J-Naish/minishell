@@ -11,7 +11,7 @@ t_token	**init_tokens(void)
 	return (tokens);
 }
 
-t_token	*create_token(char *value, t_token_type type)
+static t_token	*create_token(char *value, t_token_type type)
 {
 	t_token	*token;
 
@@ -21,7 +21,7 @@ t_token	*create_token(char *value, t_token_type type)
 	return (token);
 }
 
-int	get_tokens_size(t_token **tokens)
+static int	get_tokens_size(t_token **tokens)
 {
 	int	i;
 
