@@ -15,9 +15,21 @@ void	free_str_arr(t_str_arr_heap str_arr)
 	free(str_arr);
 }
 
-void	free_command(t_command *command)
+void	free_token(t_token *token)
 {
-	free_str_arr(command->args);
-	free(command->raw_prompt);
-	free(command);
+	free(token->value);
+	free(token);
+}
+
+void	free_tokens(t_token **tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		free_token(tokens[i]);
+		i++;
+	}
+	free(tokens);
 }
