@@ -2,10 +2,16 @@
 
 t_signal	g_signal;
 
+static void	init_signal(void)
+{
+	g_signal.status = 0;
+}
+
 int	main(void)
 {
 	t_str_heap	prompt;
 
+	init_signal();
 	while (1)
 	{
 		prompt = readline(SHELL_NAME"$ ");
