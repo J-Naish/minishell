@@ -1,5 +1,7 @@
 #include "../include/minishell.h"
 
+t_signal	g_signal;
+
 int	main(void)
 {
 	t_str_heap	prompt;
