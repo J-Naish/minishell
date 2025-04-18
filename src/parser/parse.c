@@ -7,12 +7,14 @@ t_token	**parse(t_str_heap prompt)
 	if (has_invalid_quote(prompt))
 	{
 		ft_putstr_fd("invalid quote\n", STDERR_FILENO);
+		g_signal.status = 1;
 		return (NULL);
 	}
 	tokens = split_prompt(prompt);
 	if (!tokens)
 	{
 		ft_putstr_fd("memory allocation error\n", STDERR_FILENO);
+		g_signal.status = 1;
 		return (NULL);
 	}
 	return (tokens);
