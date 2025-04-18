@@ -36,6 +36,11 @@ void	print_str(const t_str str)
 	int	i;
 
 	i = 0;
+	if (!str)
+	{
+		ft_putstr_fd(BOLD"null"RESET, STDOUT_FILENO);
+		return ;
+	}
 	ft_putstr_fd(GREEN"\'", STDOUT_FILENO);
 	while (str[i])
 	{
@@ -66,5 +71,7 @@ void	print_str(const t_str str)
 // 	print_str("");
 // 	printf("\n");
 // 	print_str("test case \nnew line");
+// 	printf("\n");
+// 	print_str(NULL);
 // 	printf("\n");
 // }

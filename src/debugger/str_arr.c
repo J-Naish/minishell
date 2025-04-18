@@ -14,10 +14,10 @@ void	print_str_arr(const t_str_arr str_arr)
 	while (str_arr[i])
 	{
 		print_str(str_arr[i]);
-		i++;
 		ft_putstr_fd(", ", STDOUT_FILENO);
+		i++;
 	}
-	ft_putstr_fd(BOLD"null"RESET, STDOUT_FILENO);
+	print_str(str_arr[i]);
 	ft_putstr_fd(" ]\n", STDOUT_FILENO);
 }
 
