@@ -21,7 +21,7 @@
 # include "../libft/libft.h"
 # include "./builtins.h"
 # include "./constants.h"
-# include "./debug.h"
+# include "./debugger.h"
 # include "./executor.h"
 # include "./types.h"
 # include "./utils.h"

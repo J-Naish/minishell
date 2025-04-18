@@ -1,4 +1,4 @@
-#include "../../include/debug.h"
+#include "../../include/debugger.h"
 
 static bool	is_escape_char(char c)
 {

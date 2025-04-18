@@ -1,4 +1,4 @@
-#include "../../include/debug.h"
+#include "../../include/debugger.h"
 
 t_str	bool_to_str(bool b)
 {

@@ -1,5 +1,5 @@
-#ifndef DEBUG_H
-# define DEBUG_H
+#ifndef DEBUGGER_H
+# define DEBUGGER_H
 
 # include "./types.h"
 # include "./minishell.h"
@@ -25,5 +25,8 @@ t_str	bool_to_str(bool b);
  * @param b 真偽値
  */
 void	print_bool(bool b);
+
+void	print_token(t_token *token);
+void	print_tokens(t_token **tokens);
 
 #endif

@@ -1,6 +1,6 @@
 #include "../../include/parser.h"
 
-static t_token	**init_tokens(void)
+t_token	**init_tokens(void)
 {
 	t_token	**tokens;
 
@@ -11,7 +11,7 @@ static t_token	**init_tokens(void)
 	return (tokens);
 }
 
-static t_token	*create_token(char *value, t_token_type type)
+t_token	*create_token(char *value, t_token_type type)
 {
 	t_token	*token;
 
@@ -21,7 +21,7 @@ static t_token	*create_token(char *value, t_token_type type)
 	return (token);
 }
 
-static int	get_tokens_size(t_token **tokens)
+int	get_tokens_size(t_token **tokens)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ static int	get_tokens_size(t_token **tokens)
 	return (i);
 }
 
-static t_token	**append_token(t_token **tokens, char *value, t_token_type type)
+t_token	**append_token(t_token **tokens, char *value, t_token_type type)
 {
 	t_token	**new_tokens;
 	int		size;
@@ -52,3 +52,18 @@ static t_token	**append_token(t_token **tokens, char *value, t_token_type type)
 	free(tokens);
 	return (new_tokens);
 }
+
+// int main() {
+// 	t_token	**tokens;
+// 	tokens = NULL;
+// 	print_tokens(tokens);
+// 	tokens = init_tokens();
+// 	print_tokens(tokens);
+// 	tokens = append_token(tokens, "echo", WORD);
+// 	print_tokens(tokens);
+// 	tokens = append_token(tokens, "hello world", WORD);
+// 	tokens = append_token(tokens, "||", REDIRECT);
+// 	tokens = append_token(tokens, "wc", WORD);
+// 	print_tokens(tokens);
+// 	free_tokens(tokens);
+// }

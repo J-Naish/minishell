@@ -9,13 +9,14 @@ SRC := src/builtins/echo.c\
 		src/executor/executor.c\
 		src/parser/helpers.c\
 		src/parser/split_prompt.c\
+		src/parser/tokenize.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
 		src/utils/string.c\
 		src/main.c
 HEADERS = include/builtins.h\
 			include/constants.h\
-			include/debug.h\
+			include/debugger.h\
 			include/executor.h\
 			include/minishell.h\
 			include/types.h\
