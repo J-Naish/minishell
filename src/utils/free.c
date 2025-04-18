@@ -1,11 +1,5 @@
 #include "../../include/utils.h"
 
-static void	free_token(t_token *token)
-{
-	free(token->value);
-	free(token);
-}
-
 void	free_tokens(t_token **tokens)
 {
 	int	i;
@@ -13,8 +7,22 @@ void	free_tokens(t_token **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		free_token(tokens[i]);
+		free(tokens[i]->value);
+		free(tokens[i]);
 		i++;
 	}
 	free(tokens);
+}
+
+void	free_str_arr(t_str_arr_heap str_arr)
+{
+	int	i;
+
+	i = 0;
+	while (str_arr[i])
+	{
+		free(str_arr[i]);
+		i++;
+	}
+	free(str_arr);
 }
