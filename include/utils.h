@@ -10,6 +10,8 @@ void	memory_allocation_failed(void);
 
 void	free_tokens(t_token **tokens);
 
+void	free_str_arr(t_str_arr_heap str_arr);
+
 /**
  * @brief 2つの文字列が完全一致するか検証する関数
  * 
