@@ -9,7 +9,7 @@ static void	append_quoted_word(t_token ***tokens,
 	(*i)++;
 	length = next_quote_index(&prompt[*i], quote);
 	temp = extract_str(&prompt[*i], length);
-	*tokens = append_token(*tokens, temp, WORD);
+	*tokens = append_token(*tokens, temp, TOKEN_WORD);
 	free(temp);
 	*i += length + 1;
 }
@@ -24,11 +24,11 @@ static void	append_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 	if (prompt[*i] == prompt[*i + 1])
 		length += 1;
 	if (prompt[*i] == '&')
-		type = CHAIN;
+		type = TOKEN_CHAIN;
 	else if (prompt[*i] == '|' && prompt[*i + 1] == '|')
-		type = CHAIN;
+		type = TOKEN_CHAIN;
 	else
-		type = REDIRECT;
+		type = TOKEN_REDIRECT;
 	temp = extract_str(&prompt[*i], length);
 	*tokens = append_token(*tokens, temp, type);
 	free(temp);
@@ -42,7 +42,7 @@ static void	append_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 
 	length = next_index(&prompt[*i]);
 	temp = extract_str(&prompt[*i], length);
-	*tokens = append_token(*tokens, temp, WORD);
+	*tokens = append_token(*tokens, temp, TOKEN_WORD);
 	free(temp);
 	*i += length;
 }

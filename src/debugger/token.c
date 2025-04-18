@@ -3,11 +3,11 @@
 static void	print_token_type(t_token_type token_type)
 {
 	ft_putstr_fd(YELLOW, STDOUT_FILENO);
-	if (token_type == WORD)
+	if (token_type == TOKEN_WORD)
 		ft_putstr_fd("WORD", STDOUT_FILENO);
-	else if (token_type == REDIRECT)
+	else if (token_type == TOKEN_REDIRECT)
 		ft_putstr_fd("REDIRECT", STDOUT_FILENO);
-	else if (token_type == CHAIN)
+	else if (token_type == TOKEN_CHAIN)
 		ft_putstr_fd("CHAIN", STDOUT_FILENO);
 	else
 		ft_putstr_fd(BLACK"undefined", STDOUT_FILENO);

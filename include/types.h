@@ -30,17 +30,17 @@ typedef char**	t_str_arr;
 /**
  * @brief トークンの属性を表す列挙型
  * 
- * @param WORD コマンド、コマンドのフラグ、コマンドの引数
+ * @param TOKEN_WORD コマンド、コマンドのフラグ、コマンドの引数
  * 
- * @param REDIRECT |, >, <, >>, <<などのリダイレクト
+ * @param TOKEN_REDIRECT |, >, <, >>, <<などのリダイレクト
  * 
- * @param CHAIN ||, &&などのチェイン
+ * @param TOKEN_CHAIN ||, &&などのチェイン
  */
 typedef enum e_token_type
 {
-	WORD,
-	REDIRECT,
-	CHAIN
+	TOKEN_WORD,
+	TOKEN_REDIRECT,
+	TOKEN_CHAIN
 }	t_token_type;
 
 /**
