@@ -9,6 +9,7 @@ SRC := src/builtins/echo.c\
 		src/debugger/token.c\
 		src/executor/executor.c\
 		src/parser/helpers.c\
+		src/parser/parse.c\
 		src/parser/split.c\
 		src/parser/token.c\
 		src/utils/error_handler.c\

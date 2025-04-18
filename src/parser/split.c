@@ -1,6 +1,6 @@
 #include "../../include/parser.h"
 
-static void	handle_quote(t_token ***tokens,
+static void	append_quoted_word(t_token ***tokens,
 	t_str_heap prompt, int *i, char quote)
 {
 	int			length;
@@ -14,7 +14,7 @@ static void	handle_quote(t_token ***tokens,
 	*i += length + 1;
 }
 
-static void	handle_special_char(t_token ***tokens, t_str_heap prompt, int *i)
+static void	append_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 {
 	int				length;
 	t_str_heap		temp;
@@ -35,7 +35,7 @@ static void	handle_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 	*i += length;
 }
 
-static void	handle_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
+static void	append_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 {
 	int			length;
 	t_str_heap	temp;
@@ -61,13 +61,13 @@ t_token	**split_prompt(t_str_heap prompt)
 		if (is_space(prompt[i]))
 			i++;
 		else if (prompt[i] == '\'')
-			handle_quote(&tokens, prompt, &i, '\'');
+			append_quoted_word(&tokens, prompt, &i, '\'');
 		else if (prompt[i] == '\"')
-			handle_quote(&tokens, prompt, &i, '\"');
+			append_quoted_word(&tokens, prompt, &i, '\"');
 		else if (is_special_char(prompt[i]))
-			handle_special_char(&tokens, prompt, &i);
+			append_special_char(&tokens, prompt, &i);
 		else
-			handle_regular_word(&tokens, prompt, &i);
+			append_regular_word(&tokens, prompt, &i);
 	}
 	return (tokens);
 }
