@@ -1,5 +1,5 @@
-#ifndef BUILTSINS_H
-# define BUILTSINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
 # include "./minishell.h"
 
