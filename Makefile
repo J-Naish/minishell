@@ -13,6 +13,7 @@ SRC := src/builtins/echo.c\
 		src/parser/token.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
+		src/utils/str_arr.c\
 		src/utils/string.c\
 		src/main.c
 HEADERS := include/builtins.h\
