@@ -26,10 +26,6 @@
 # include "./types.h"
 # include "./utils.h"
 
-typedef struct s_signal
-{
-	int	status;
-}	t_signal;
 extern t_signal	g_signal;
 
 #endif

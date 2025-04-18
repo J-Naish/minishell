@@ -2,6 +2,14 @@
 # define TYPES_H
 
 /**
+ * @brief シグナルやステータスを保持するためのグローバル変数の型
+ */
+typedef struct s_signal
+{
+	int	status;
+}	t_signal;
+
+/**
  * @brief ヒープ領域に保存されたfreeすべき文字列型です
  * 
  * char *のエイリアスです
