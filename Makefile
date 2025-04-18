@@ -16,7 +16,7 @@ SRC := src/builtins/echo.c\
 		src/utils/free.c\
 		src/utils/string.c\
 		src/main.c
-HEADERS = include/builtins.h\
+HEADERS := include/builtins.h\
 			include/constants.h\
 			include/debugger.h\
 			include/executor.h\
