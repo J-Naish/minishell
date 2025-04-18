@@ -3,6 +3,7 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 SRC := src/builtins/echo.c\
 		src/builtins/exit.c\
+		src/builtins/helpers.c\
 		src/debugger/bool.c\
 		src/debugger/str_arr.c\
 		src/debugger/token.c\
