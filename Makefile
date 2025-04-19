@@ -11,8 +11,8 @@ SRC := src/builtins/echo.c\
 		src/debugger/token.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
-		src/parser/split.c\
-		src/parser/token.c\
+		src/parser/token_utils.c\
+		src/parser/tokenize.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
 		src/utils/str_arr.c\

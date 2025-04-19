@@ -47,7 +47,7 @@ static void	append_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 	*i += length;
 }
 
-t_token	**split_prompt(t_str_heap prompt)
+t_token	**tokenize(t_str_heap prompt)
 {
 	t_token		**tokens;
 	int			i;
