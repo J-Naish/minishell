@@ -100,8 +100,57 @@ t_command	**append_command(t_command **command_arr, t_command *command)
 }
 
 // int main() {
+// 	// test 1
 // 	t_token **tokens = tokenize("echo 'hello world'");
 // 	t_command *command = create_command(tokens, 0, 1);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 2
+// 	tokens = tokenize("ls > log.txt");
+// 	command = create_command(tokens, 0, 2);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 3
+// 	tokens = tokenize("sort < input.txt");
+// 	command = create_command(tokens, 0, 2);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 4
+// 	tokens = tokenize("echo 'new line' >> log.txt");
+// 	command = create_command(tokens, 0, 3);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 5
+// 	tokens = tokenize("cat << EOF");
+// 	command = create_command(tokens, 0, 2);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 6
+// 	tokens = tokenize("cat < input.txt > output.txt");
+// 	command = create_command(tokens, 0, 4);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 7
+// 	tokens = tokenize("grep -i 'pattern' < file.txt > results.txt");
+// 	command = create_command(tokens, 0, 6);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 8
+// 	tokens = tokenize("echo hello >");
+// 	command = create_command(tokens, 0, 2);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// 	// test 9
+// 	tokens = tokenize("ls -la /home /usr /var");
+// 	command = create_command(tokens, 0, 4);
 // 	print_command(command);
 // 	free_tokens(tokens);
 // 	free_command(command);
