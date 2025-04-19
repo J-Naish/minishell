@@ -6,6 +6,7 @@ SRC := src/builtins/echo.c\
 		src/builtins/helpers.c\
 		src/debugger/bool.c\
 		src/debugger/command.c\
+		src/debugger/pipeline.c\
 		src/debugger/str_arr.c\
 		src/debugger/str.c\
 		src/debugger/token.c\
