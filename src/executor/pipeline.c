@@ -11,6 +11,5 @@ static t_pipeline	*init_pipeline(void)
 	if (!pipeline->commands)
 		return (free(pipeline), NULL);
 	pipeline->commands[0] = NULL;
-	pipeline->next = NULL;
 	return (pipeline);
 }

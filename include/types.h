@@ -88,7 +88,6 @@ typedef struct s_pipeline
 {
 	t_command			**commands;
 	t_chain_operator	operator;
-	struct s_pipeline	*next;
 }	t_pipeline;
 
 #endif
