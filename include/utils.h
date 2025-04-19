@@ -41,4 +41,7 @@ bool			is_special_char(char c);
  */
 bool			is_space(char c);
 
+bool			is_pipe(t_token *token);
+bool			is_chain(t_token *token);
+
 #endif

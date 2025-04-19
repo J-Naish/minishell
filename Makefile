@@ -20,6 +20,7 @@ SRC := src/builtins/echo.c\
 		src/utils/free.c\
 		src/utils/str_arr.c\
 		src/utils/string.c\
+		src/utils/token.c\
 		src/main.c
 HEADERS := include/builtins.h\
 			include/constants.h\
