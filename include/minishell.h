@@ -23,6 +23,7 @@
 # include "./constants.h"
 # include "./debugger.h"
 # include "./executor.h"
+# include "./parser.h"
 # include "./utils.h"
 
 extern t_signal	g_signal;
