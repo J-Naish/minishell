@@ -41,3 +41,21 @@ void	free_command(t_command *command)
 		free(command->delimiter);
 	free(command);
 }
+
+void	free_pipeline(t_pipeline *pipeline)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (pipeline)
+	{
+		j = 0;
+		while (pipeline->commands[j])
+		{
+			free_command(pipeline->commands[j]);
+			j++;
+		}
+	}
+	free(pipeline);
+}
