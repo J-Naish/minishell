@@ -81,12 +81,12 @@ typedef enum e_chain_operator
 {
 	CHAIN_AND,
 	CHAIN_OR,
+	CHAIN_UNDEFINED,
 }	t_chain_operator;
 
 typedef struct s_pipeline
 {
 	t_command			**commands;
-	int					command_count;
 	t_chain_operator	operator;
 	struct s_pipeline	*next;
 }	t_pipeline;

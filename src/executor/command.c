@@ -65,17 +65,6 @@ t_command	*create_command(t_token **tokens, int start, int end)
 	return (command);
 }
 
-t_command	**init_command_arr(void)
-{
-	t_command	**commands;
-
-	commands = (t_command **)malloc(sizeof(t_command *) * 1);
-	if (!commands)
-		return (NULL);
-	*commands = NULL;
-	return (commands);
-}
-
 t_command	**append_command(t_command **command_arr, t_command *command)
 {
 	int			i;
