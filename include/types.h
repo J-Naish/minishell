@@ -69,6 +69,7 @@ typedef struct s_token
 typedef struct s_command
 {
 	t_str_arr_heap	args;
+	bool			is_redirect;
 	t_str_heap		input_file;
 	t_str_heap		output_file;
 	bool			append_output;
