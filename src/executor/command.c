@@ -99,9 +99,10 @@ t_command	**append_command(t_command **command_arr, t_command *command)
 	return (new);
 }
 
-int main() {
-	t_token **tokens = tokenize("echo 'hello world'");
-	t_command *command = create_command(tokens, 0 , 1);
-	print_command(command);
-	free_tokens(tokens);
-}
+// int main() {
+// 	t_token **tokens = tokenize("echo 'hello world'");
+// 	t_command *command = create_command(tokens, 0, 1);
+// 	print_command(command);
+// 	free_tokens(tokens);
+// 	free_command(command);
+// }

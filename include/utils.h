@@ -9,8 +9,8 @@ void			system_error(void);
 void			memory_allocation_failed(void);
 
 void			free_tokens(t_token **tokens);
-
 void			free_str_arr(t_str_arr_heap str_arr);
+void			free_command(t_command *command);
 
 t_str_arr_heap	init_str_arr(void);
 t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str);

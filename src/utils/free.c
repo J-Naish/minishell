@@ -26,3 +26,18 @@ void	free_str_arr(t_str_arr_heap str_arr)
 	}
 	free(str_arr);
 }
+
+void	free_command(t_command *command)
+{
+	if (command->args)
+		free_str_arr(command->args);
+	if (command->input_file)
+		free(command->input_file);
+	if (command->output_file)
+		free(command->output_file);
+	if (command->heredoc)
+		free(command->heredoc);
+	if (command->delimiter)
+		free(command->delimiter);
+	free(command);
+}
