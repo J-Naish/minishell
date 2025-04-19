@@ -42,20 +42,22 @@ void	free_command(t_command *command)
 	free(command);
 }
 
-void	free_pipeline(t_pipeline *pipeline)
+void	free_pipelines(t_pipeline **pipelines)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (pipeline)
+	while (pipelines[i])
 	{
 		j = 0;
-		while (pipeline->commands[j])
+		while (pipelines[i]->commands[j])
 		{
-			free_command(pipeline->commands[j]);
+			free_command(pipelines[i]->commands[j]);
 			j++;
 		}
+		free(pipelines[i]);
+		i++;
 	}
-	free(pipeline);
+	free(pipelines);
 }
