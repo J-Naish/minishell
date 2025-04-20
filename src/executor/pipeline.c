@@ -80,9 +80,9 @@ t_pipeline	**build_pipeline(t_token **tokens)
 				pipelines[pl_idx]->operator = CHAIN_OR;
 			else if (is_same_str(tokens[i]->value, "&&"))
 				pipelines[pl_idx]->operator = CHAIN_AND;
-			pl_idx++;
-			pipelines = append_pipeline(pipelines, init_pipeline());
 			pipelines[pl_idx]->commands = append_command(pipelines[pl_idx]->commands, create_command(tokens, start, i));
+			pipelines = append_pipeline(pipelines, init_pipeline());
+			pl_idx++;
 			start = i + 1;
 		}
 		i++;
@@ -93,10 +93,90 @@ t_pipeline	**build_pipeline(t_token **tokens)
 }
 
 // int main() {
-// 	// segfault
-// 	t_token **tokens = tokenize("echo hello world");
-// 	t_pipeline **pipelines = build_pipeline(tokens);
+// 	t_token **tokens;
+// 	t_pipeline **pipelines;
+// 	// test 1
+// 	tokens = tokenize("echo hello world");
+// 	pipelines = build_pipeline(tokens);
 // 	print_pipelines(pipelines);
 // 	free_tokens(tokens);
 // 	free_pipelines(pipelines);
+// 	// test 2
+// 	tokens = tokenize("ls -la | grep .txt");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 3
+// 	tokens = tokenize("mkdir test && cd test");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 4
+// 	tokens = tokenize("cat nonexistent.txt || echo 'File not found'");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 5
+// 	tokens = tokenize("cat /etc/passwd | grep root | wc -l");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 6
+// 	tokens = tokenize("cat < input.txt | sort | uniq > output.txt");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 7
+// 	tokens = tokenize("ls -la && echo 'success' || echo 'failure'");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 8
+// 	tokens = tokenize("cat << EOF | grep hello");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 9
+// 	tokens = tokenize("");
+//     pipelines = build_pipeline(tokens);
+//     print_pipelines(pipelines);
+//     free_tokens(tokens);
+//     free_pipelines(pipelines);
+// 	// test 10
+// 	tokens = tokenize("|");
+//     pipelines = build_pipeline(tokens);
+// 	print_pipelines(pipelines);
+// 	free_pipelines(pipelines);
+//     free_tokens(tokens);
+// 	// test 11
+// 	tokens = tokenize("ls -la |");
+//     pipelines = build_pipeline(tokens);
+// 	print_pipelines(pipelines);
+// 	free_pipelines(pipelines);
+//     free_tokens(tokens);
+// 	// test 12
+// 	tokens = tokenize("echo hello &&");
+//     pipelines = build_pipeline(tokens);
+// 	print_pipelines(pipelines);
+// 	free_pipelines(pipelines);
+//     free_tokens(tokens);
+// 	// test 13
+// 	tokens = tokenize("echo hello ||");
+//     pipelines = build_pipeline(tokens);
+// 	print_pipelines(pipelines);
+// 	free_pipelines(pipelines);
+//     free_tokens(tokens);
+// 	// test 14
+// 	tokens = tokenize("ls | | grep txt");
+//     pipelines = build_pipeline(tokens);
+// 	print_pipelines(pipelines);
+// 	free_pipelines(pipelines);
+//     free_tokens(tokens);
 // }
