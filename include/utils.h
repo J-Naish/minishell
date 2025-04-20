@@ -3,6 +3,7 @@
 
 # include "./minishell.h"
 
+void			put_error(const char *s);
 void			command_not_found(const t_str command);
 void			unable_to_execute(const t_str file_path);
 void			system_error(void);
@@ -44,5 +45,6 @@ bool			is_space(char c);
 
 bool			is_pipe(t_token *token);
 bool			is_chain(t_token *token);
+bool			is_word(t_token *token);
 
 #endif
