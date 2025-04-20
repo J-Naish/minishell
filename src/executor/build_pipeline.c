@@ -1,55 +1,25 @@
 #include "../../include/executor.h"
 
-static t_pipeline	*init_pipeline(void)
+static void	set_operator(t_pipeline *pipeline, t_token *token)
 {
-	t_pipeline	*pipeline;
-
-	pipeline = (t_pipeline *)malloc(sizeof(t_pipeline));
-	if (!pipeline)
-		return (NULL);
-	pipeline->commands = (t_command **)malloc(sizeof(t_command *));
-	if (!pipeline->commands)
-		return (free(pipeline), NULL);
-	pipeline->commands[0] = NULL;
-	pipeline->operator = CHAIN_UNDEFINED;
-	return (pipeline);
+	if (is_same_str(token->value, "||"))
+		pipeline->operator = CHAIN_OR;
+	else if (is_same_str(token->value, "&&"))
+		pipeline->operator = CHAIN_AND;
 }
 
-static t_pipeline	**init_pipeline_arr(void)
+static void	add_command_to_pipeline(t_pipeline *pipeline,
+		t_token **tokens, int start, int end)
 {
-	t_pipeline	**pipeline_arr;
-
-	pipeline_arr = (t_pipeline **)malloc(sizeof(t_pipeline *) * 2);
-	if (!pipeline_arr)
-		return (NULL);
-	pipeline_arr[0] = init_pipeline();
-	if (!pipeline_arr[0])
-		return (free(pipeline_arr), NULL);
-	pipeline_arr[1] = NULL;
-	return (pipeline_arr);
+	pipeline->commands = append_command(pipeline->commands,
+			create_command(tokens, start, end));
 }
 
-static t_pipeline	**append_pipeline(t_pipeline **pl_arr, t_pipeline *pl)
+static t_pipeline	**handle_chain_operator(t_pipeline **pipelines,
+		int pl_idx, t_token *token)
 {
-	int			i;
-	t_pipeline	**new;
-
-	i = 0;
-	while (pl_arr[i])
-		i++;
-	new = (t_pipeline **)malloc(sizeof(t_pipeline *) * (i + 2));
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (pl_arr[i])
-	{
-		new[i] = pl_arr[i];
-		i++;
-	}
-	new[i] = pl;
-	new[i + 1] = NULL;
-	free(pl_arr);
-	return (new);
+	set_operator(pipelines[pl_idx], token);
+	return (append_pipeline(pipelines, init_pipeline()));
 }
 
 t_pipeline	**build_pipeline(t_token **tokens)
@@ -65,30 +35,19 @@ t_pipeline	**build_pipeline(t_token **tokens)
 	pipelines = init_pipeline_arr();
 	while (tokens[i])
 	{
-		if (is_pipe(tokens[i]))
+		if (is_pipe(tokens[i]) || is_chain(tokens[i]))
 		{
-			if (i == 0)
-				return (NULL);
-			pipelines[pl_idx]->commands = append_command(pipelines[pl_idx]->commands, create_command(tokens, start, i));
+			add_command_to_pipeline(pipelines[pl_idx], tokens, start, i);
 			start = i + 1;
-		}
-		if (is_chain(tokens[i]))
-		{
-			if (i == 0)
-				return (NULL);
-			if (is_same_str(tokens[i]->value, "||"))
-				pipelines[pl_idx]->operator = CHAIN_OR;
-			else if (is_same_str(tokens[i]->value, "&&"))
-				pipelines[pl_idx]->operator = CHAIN_AND;
-			pipelines[pl_idx]->commands = append_command(pipelines[pl_idx]->commands, create_command(tokens, start, i));
-			pipelines = append_pipeline(pipelines, init_pipeline());
-			pl_idx++;
-			start = i + 1;
+			if (is_chain(tokens[i]))
+			{
+				pipelines = handle_chain_operator(pipelines, pl_idx, tokens[i]);
+				pl_idx++;
+			}
 		}
 		i++;
 	}
-	pipelines[pl_idx]->commands = append_command(pipelines[pl_idx]->commands,
-			create_command(tokens, start, i));
+	add_command_to_pipeline(pipelines[pl_idx], tokens, start, i);
 	return (pipelines);
 }
 
