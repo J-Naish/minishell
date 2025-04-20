@@ -17,7 +17,7 @@ void	print_bool(bool b);
  */
 void	print_command(t_command *command);
 
-void	print_pipeline(t_pipeline *pipeline);
+void	print_pipelines(t_pipeline **pipelines);
 
 /**
  * @brief 文字列の配列を出力する関数

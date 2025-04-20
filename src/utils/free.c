@@ -56,6 +56,7 @@ void	free_pipelines(t_pipeline **pipelines)
 			free_command(pipelines[i]->commands[j]);
 			j++;
 		}
+		free(pipelines[i]->commands);
 		free(pipelines[i]);
 		i++;
 	}

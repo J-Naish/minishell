@@ -2,7 +2,7 @@
 
 static void	print_chain(t_chain_operator operator)
 {
-	ft_putstr_fd("  operator: ", STDOUT_FILENO);
+	ft_putstr_fd("    operator: ", STDOUT_FILENO);
 	if (operator == CHAIN_AND)
 		ft_putstr_fd(YELLOW"AND"RESET"(&&)", STDOUT_FILENO);
 	else if (operator == CHAIN_OR)
@@ -15,33 +15,33 @@ static void	print_single_command(t_command *command)
 {
 	if (!command)
 	{
-		ft_putstr_fd("    ", STDOUT_FILENO);
+		ft_putstr_fd("      ", STDOUT_FILENO);
 		print_str(NULL);
 		return ;
 	}
-	ft_putstr_fd("    {\n", STDOUT_FILENO);
-	ft_putstr_fd("      args         : ", STDOUT_FILENO);
+	ft_putstr_fd("      {\n", STDOUT_FILENO);
+	ft_putstr_fd("        args         : ", STDOUT_FILENO);
 	print_str_arr(command->args);
-	ft_putstr_fd(",\n      is redirect  : ", STDOUT_FILENO);
+	ft_putstr_fd(",\n        is redirect  : ", STDOUT_FILENO);
 	print_bool(command->is_redirect);
-	ft_putstr_fd(",\n      input file   : ", STDOUT_FILENO);
+	ft_putstr_fd(",\n        input file   : ", STDOUT_FILENO);
 	print_str(command->input_file);
-	ft_putstr_fd(",\n      output file  : ", STDOUT_FILENO);
+	ft_putstr_fd(",\n        output file  : ", STDOUT_FILENO);
 	print_str(command->output_file);
-	ft_putstr_fd(",\n      append output: ", STDOUT_FILENO);
+	ft_putstr_fd(",\n        append output: ", STDOUT_FILENO);
 	print_bool(command->append_output);
-	ft_putstr_fd(",\n      heredoc      : ", STDOUT_FILENO);
+	ft_putstr_fd(",\n        heredoc      : ", STDOUT_FILENO);
 	print_str(command->heredoc);
-	ft_putstr_fd(",\n      delimiter    : ", STDOUT_FILENO);
+	ft_putstr_fd(",\n        delimiter    : ", STDOUT_FILENO);
 	print_str(command->delimiter);
-	ft_putstr_fd("\n    }", STDOUT_FILENO);
+	ft_putstr_fd("\n      }", STDOUT_FILENO);
 }
 
 static void	print_commands(t_command **commands)
 {
 	int	i;
 
-	ft_putstr_fd("  commands: ", STDOUT_FILENO);
+	ft_putstr_fd("    commands: ", STDOUT_FILENO);
 	if (!commands)
 	{
 		print_str(NULL);
@@ -57,15 +57,43 @@ static void	print_commands(t_command **commands)
 		i++;
 	}
 	print_single_command(commands[i]);
-	ft_putstr_fd("\n  ],\n", STDOUT_FILENO);
+	ft_putstr_fd("\n    ],\n", STDOUT_FILENO);
 }
 
-void	print_pipeline(t_pipeline *pipeline)
+static void	print_pipeline(t_pipeline *pipeline)
 {
-	ft_putstr_fd("{\n", STDOUT_FILENO);
+	if (!pipeline)
+	{
+		print_str(NULL);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return ;
+	}
+	ft_putstr_fd("  {\n", STDOUT_FILENO);
 	print_commands(pipeline->commands);
 	print_chain(pipeline->operator);
-	ft_putstr_fd("\n}\n", STDOUT_FILENO);
+	ft_putstr_fd("\n  }\n", STDOUT_FILENO);
+}
+
+void	print_pipelines(t_pipeline **pipelines)
+{
+	int	i;
+
+	if (!pipelines)
+	{
+		print_str(NULL);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return ;
+	}
+	i = 0;
+	ft_putstr_fd("[\n", STDOUT_FILENO);
+	while (pipelines[i])
+	{
+		print_pipeline(pipelines[i]);
+		i++;
+	}
+	ft_putstr_fd("  ", STDOUT_FILENO);
+	print_pipeline(pipelines[i]);
+	ft_putstr_fd("]\n", STDOUT_FILENO);
 }
 
 // int main() {
@@ -77,15 +105,14 @@ void	print_pipeline(t_pipeline *pipeline)
 // 	commands[1] = create_command(tokens2, 0, 3);
 // 	commands[2] = create_command(tokens3, 0, 2);
 // 	commands[3] = NULL;
-// 	t_pipeline pipeline;
-// 	pipeline.commands = commands;
-// 	pipeline.operator = CHAIN_AND;
-// 	print_pipeline(&pipeline);
-// 	free_command(commands[0]);
-// 	free_command(commands[1]);
-// 	free_command(commands[2]);
+// 	t_pipeline **pipelines;
+// 	pipelines = (t_pipeline **)malloc(sizeof(t_pipeline *) * 2);
+// 	pipelines[0] = (t_pipeline *)malloc(sizeof(t_pipeline));
+// 	pipelines[0]->commands = commands;
+// 	pipelines[0]->operator = CHAIN_AND;
+// 	print_pipelines(pipelines);
+// 	free_pipelines(pipelines);
 // 	free_tokens(tokens1);
 // 	free_tokens(tokens2);
 // 	free_tokens(tokens3);
-// 	free(commands);
 // }
