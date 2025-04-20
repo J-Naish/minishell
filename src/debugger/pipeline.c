@@ -71,7 +71,7 @@ static void	print_pipeline(t_pipeline *pipeline)
 	ft_putstr_fd("  {\n", STDOUT_FILENO);
 	print_commands(pipeline->commands);
 	print_chain(pipeline->operator);
-	ft_putstr_fd("\n  }\n", STDOUT_FILENO);
+	ft_putstr_fd("\n  }", STDOUT_FILENO);
 }
 
 void	print_pipelines(t_pipeline **pipelines)
@@ -89,6 +89,7 @@ void	print_pipelines(t_pipeline **pipelines)
 	while (pipelines[i])
 	{
 		print_pipeline(pipelines[i]);
+		ft_putstr_fd(",\n", STDOUT_FILENO);
 		i++;
 	}
 	ft_putstr_fd("  ", STDOUT_FILENO);
