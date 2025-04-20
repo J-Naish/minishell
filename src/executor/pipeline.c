@@ -143,40 +143,4 @@ t_pipeline	**build_pipeline(t_token **tokens)
 //     print_pipelines(pipelines);
 //     free_tokens(tokens);
 //     free_pipelines(pipelines);
-// 	// test 9
-// 	tokens = tokenize("");
-//     pipelines = build_pipeline(tokens);
-//     print_pipelines(pipelines);
-//     free_tokens(tokens);
-//     free_pipelines(pipelines);
-// 	// test 10
-// 	tokens = tokenize("|");
-//     pipelines = build_pipeline(tokens);
-// 	print_pipelines(pipelines);
-// 	free_pipelines(pipelines);
-//     free_tokens(tokens);
-// 	// test 11
-// 	tokens = tokenize("ls -la |");
-//     pipelines = build_pipeline(tokens);
-// 	print_pipelines(pipelines);
-// 	free_pipelines(pipelines);
-//     free_tokens(tokens);
-// 	// test 12
-// 	tokens = tokenize("echo hello &&");
-//     pipelines = build_pipeline(tokens);
-// 	print_pipelines(pipelines);
-// 	free_pipelines(pipelines);
-//     free_tokens(tokens);
-// 	// test 13
-// 	tokens = tokenize("echo hello ||");
-//     pipelines = build_pipeline(tokens);
-// 	print_pipelines(pipelines);
-// 	free_pipelines(pipelines);
-//     free_tokens(tokens);
-// 	// test 14
-// 	tokens = tokenize("ls | | grep txt");
-//     pipelines = build_pipeline(tokens);
-// 	print_pipelines(pipelines);
-// 	free_pipelines(pipelines);
-//     free_tokens(tokens);
 // }

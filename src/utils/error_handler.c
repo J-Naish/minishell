@@ -1,6 +1,6 @@
 #include "../../include/utils.h"
 
-void	put_error(const char *s)
+void	put_error(char *s)
 {
 	ft_putstr_fd(s, STDERR_FILENO);
 }
@@ -9,7 +9,7 @@ void	command_not_found(const t_str command)
 {
 	put_error(SHELL_NAME": Command not found: ");
 	put_error(command);
-	put_error('\n');
+	put_error("\n");
 	exit(EXIT_COMMAND_NOT_FOUND);
 }
 

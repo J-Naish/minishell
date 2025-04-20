@@ -3,7 +3,7 @@
 
 # include "./minishell.h"
 
-void			put_error(const char *s);
+void			put_error(char *s);
 void			command_not_found(const t_str command);
 void			unable_to_execute(const t_str file_path);
 void			system_error(void);
