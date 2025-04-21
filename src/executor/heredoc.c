@@ -14,7 +14,6 @@ void	heredoc(t_command *command)
 	t_str_heap	line;
 	int			pipe_fds[2];
 
-	ft_putstr_fd("heredoc is running\n", STDOUT_FILENO);
 	if (pipe(pipe_fds) == -1)
 	{
 		perror(SHELL_NAME": ");
