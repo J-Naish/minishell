@@ -12,7 +12,7 @@ static t_str_heap	join_free(t_str_heap s1, t_str_heap s2)
 
 static bool	is_delimiter(t_str_heap line, t_str_heap delimiter)
 {
-	if (ft_strncmp(line, delimiter, ft_strlen(delimiter) == 0)
+	if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
 		&& line[ft_strlen(delimiter)] == '\n')
 		return (true);
 	else
@@ -35,6 +35,6 @@ void	heredoc(t_command *command)
 			free(line);
 			break ;
 		}
-		join_free(command->heredoc, line);
+		command->heredoc = join_free(command->heredoc, line);
 	}
 }
