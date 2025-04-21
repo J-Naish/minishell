@@ -13,6 +13,7 @@ SRC := src/builtins/echo.c\
 		src/executor/command_utils.c\
 		src/executor/execute.c\
 		src/executor/pipeline_utils.c\
+		src/executor/run_command.c\
 		src/executor/validate.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
