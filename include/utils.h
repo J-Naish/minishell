@@ -5,6 +5,7 @@
 
 char			*get_cmd_name(t_command *command);
 bool			is_builtin_cmd(t_command *command);
+bool			is_heredoc(t_command *command);
 
 void			put_error(char *s);
 void			command_not_found(const t_str command);

@@ -27,3 +27,11 @@ bool	is_builtin_cmd(t_command *command)
 	else
 		return (false);
 }
+
+bool	is_heredoc(t_command *command)
+{
+	if (command->heredoc)
+		return (true);
+	else
+		return (false);
+}
