@@ -17,6 +17,8 @@ void			free_str_arr(t_str_arr_heap str_arr);
 void			free_command(t_command *command);
 void			free_pipelines(t_pipeline **pipelines);
 
+char			*get_next_line(int fd);
+
 t_str_arr_heap	init_str_arr(void);
 t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str);
 

@@ -1,6 +1,11 @@
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
 
+// buffer size for get_next_line
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 256
+# endif
+
 // shell name
 # ifndef SHELL_NAME
 #  define SHELL_NAME "minishell"
