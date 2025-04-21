@@ -3,6 +3,7 @@
 static void	run_command(t_command *command)
 {
 	// heredocがあればheredocを先に実行
+	print_command(command);
 }
 
 static int	execute_pipeline(t_pipeline *pipeline)
