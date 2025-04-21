@@ -20,6 +20,7 @@ static bool	is_delimiter(t_str_heap line, t_str_heap delimiter)
 }
 
 // signalでheredocを終了
+// heredocを活用できてない、ただ文字を保存してるだけ
 void	heredoc(t_command *command)
 {
 	t_str_heap	line;
