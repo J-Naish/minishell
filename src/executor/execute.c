@@ -10,6 +10,9 @@ static int	execute_pipeline(t_pipeline *pipeline, char **envp)
 	pid_t	last_pid;
 	int		status;
 
+	if (get_command_count(pipeline) == 1
+		&& is_same_str(pipeline->commands[0]->args[0], "exit"))
+		cmd_exit(pipeline->commands[0]);
 	active_pipe = 0;
 	i = 0;
 	while (pipeline->commands[i])
