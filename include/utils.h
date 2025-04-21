@@ -20,6 +20,8 @@ void			free_pipelines(t_pipeline **pipelines);
 
 char			*get_next_line(int fd);
 
+int				get_command_count(t_pipeline *pipeline);
+
 t_str_arr_heap	init_str_arr(void);
 t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str);
 
