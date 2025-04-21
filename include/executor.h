@@ -10,6 +10,8 @@ t_command	**append_command(t_command **command_arr, t_command *command);
 
 void		execute(t_pipeline **pipelines);
 
+void		heredoc(t_command *command);
+
 t_pipeline	*init_pipeline(void);
 t_pipeline	**init_pipeline_arr(void);
 t_pipeline	**append_pipeline(t_pipeline **pl_arr, t_pipeline *pl);

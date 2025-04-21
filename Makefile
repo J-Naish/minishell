@@ -17,6 +17,7 @@ SRC := src/builtins/cd.c\
 		src/executor/build_pipeline.c\
 		src/executor/command_utils.c\
 		src/executor/execute.c\
+		src/executor/heredoc.c\
 		src/executor/pipeline_utils.c\
 		src/executor/run_command.c\
 		src/executor/validate.c\
