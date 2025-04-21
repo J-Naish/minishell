@@ -23,7 +23,6 @@ static void	run_builtin(t_command *command)
 
 void	run_command(t_command *command)
 {
-	// heredocがあればheredocを先に実行
 	if (is_heredoc(command))
 		heredoc(command);
 	print_command(command);
