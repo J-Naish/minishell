@@ -34,7 +34,7 @@ bool	validate_tokens(t_token **tokens)
 	int	i;
 
 	if (!tokens)
-		return (put_error(SHELL_NAME": memory allocation error\n"), false);
+		return (false);
 	if (starts_with_pipe_or_chain(tokens))
 		return (put_token_syntax_error(tokens[0]), false);
 	if (!end_with_word(tokens))

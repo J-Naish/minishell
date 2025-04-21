@@ -35,7 +35,8 @@ int	main(void)
 		tokens = parse(prompt);
 		if (!validate_tokens(tokens))
 		{
-			free_tokens(tokens);
+			if (tokens)
+				free_tokens(tokens);
 			free(prompt);
 			rl_on_new_line();
 			continue ;
