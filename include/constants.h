@@ -24,6 +24,14 @@
 #  define EXIT_SIGNAL_BASE 128
 # endif
 
+# ifndef EXIT_FROM_SHELL
+#  define EXIT_FROM_SHELL 254
+# endif
+
+# ifndef EXIT_FROM_SHELL_BAD
+#  define EXIT_FROM_SHELL_BAD 255
+# endif
+
 // log styles
 # ifndef RED
 #  define RED "\033[31m"
