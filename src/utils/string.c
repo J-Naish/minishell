@@ -15,6 +15,14 @@ bool	is_same_str(const char *s1, const char *s2)
 		return (false);
 }
 
+bool	starts_with(const char *arg1, const char *arg2)
+{
+	if (ft_strncmp(arg1, arg2, ft_strlen(arg2)) == 0)
+		return (true);
+	else
+		return (false);
+}
+
 bool	is_special_char(char c)
 {
 	return (c == '|' || c == '&' || c == '>' || c == '<');
@@ -49,4 +57,10 @@ bool	is_space(char c)
 // 	print_bool(is_space('\t'));
 // 	print_bool(is_space('\v'));
 // 	print_bool(is_space('\n'));
+// }
+// int main() {
+// 	print_bool(starts_with("hello world", "hello"));
+// 	print_bool(starts_with("hell world", "hello"));
+// 	print_bool(starts_with("world", "hello"));
+// 	print_bool(starts_with("-1la", "-"));
 // }
