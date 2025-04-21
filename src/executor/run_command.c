@@ -76,7 +76,6 @@ void	run_command(t_command *command, char **envp)
 {
 	if (is_heredoc(command))
 		heredoc(command);
-	print_command(command);
 	if (is_builtin_cmd(command))
 	{
 		run_builtin_command(command);
