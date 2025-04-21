@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		pipelines = build_pipeline(tokens);
+		free_tokens(tokens);
 		execute(pipelines, envp);
 		rl_on_new_line();
 		free_all(pipelines, tokens, prompt);
