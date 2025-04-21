@@ -30,8 +30,8 @@ static void	print_single_command(t_command *command)
 	print_str(command->output_file);
 	ft_putstr_fd(",\n        append output: ", STDOUT_FILENO);
 	print_bool(command->append_output);
-	ft_putstr_fd(",\n        heredoc      : ", STDOUT_FILENO);
-	print_str(command->heredoc);
+	ft_putstr_fd(",\n        heredoc pipe : ", STDOUT_FILENO);
+	print_number(command->heredoc_pipe);
 	ft_putstr_fd(",\n        delimiter    : ", STDOUT_FILENO);
 	print_str(command->delimiter);
 	ft_putstr_fd("\n      }", STDOUT_FILENO);

@@ -17,6 +17,8 @@ void	print_bool(bool b);
  */
 void	print_command(t_command *command);
 
+void	print_number(int n);
+
 void	print_pipelines(t_pipeline **pipelines);
 
 /**

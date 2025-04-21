@@ -18,8 +18,8 @@ static void	print_command_fields(t_command *command)
 	ft_putstr_fd("  append output: ", STDOUT_FILENO);
 	print_bool(command->append_output);
 	ft_putstr_fd(",\n", STDOUT_FILENO);
-	// ft_putstr_fd("  heredoc pipe : ", STDOUT_FILENO);
-	// print_str(command->heredoc);
+	ft_putstr_fd("  heredoc pipe : ", STDOUT_FILENO);
+	print_number(command->heredoc_pipe);
 	ft_putstr_fd(",\n", STDOUT_FILENO);
 	ft_putstr_fd("  delimiter    : ", STDOUT_FILENO);
 	print_str(command->delimiter);
