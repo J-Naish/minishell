@@ -7,13 +7,6 @@ static void	init_signal(void)
 	g_signal.status = 0;
 }
 
-static void	free_all(t_pipeline **pls, t_token **tkns, t_str_heap prompt)
-{
-	free_pipelines(pls);
-	free_tokens(tkns);
-	free(prompt);
-}
-
 static void	call_args(int argc, char **argv)
 {
 	(void)argc;
