@@ -17,8 +17,6 @@ static void	run_builtin_command(t_command *command)
 		cmd_unset(command);
 	else if (is_same_str(cmd_name, "env"))
 		cmd_env(command);
-	else if (is_same_str(cmd_name, "exit"))
-		cmd_exit(command);
 }
 
 t_str_heap	join_path(t_str dir, t_str cmd)
