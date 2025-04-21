@@ -50,6 +50,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		pipelines = build_pipeline(tokens);
 		free_tokens(tokens);
+		free(prompt);
 		execute(pipelines, envp);
 		rl_on_new_line();
 		free_all(pipelines, tokens, prompt);
