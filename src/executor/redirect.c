@@ -17,7 +17,6 @@ void	restore_std_fds(int saved_fds[2])
 bool	setup_input_redirect(t_command *command)
 {
 	int	fd;
-	int	pipe_fd[2];
 
 	if (command->input_file)
 	{
@@ -27,14 +26,11 @@ bool	setup_input_redirect(t_command *command)
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 	}
-	else if (command->heredoc)
+	else if (command->heredoc_pipe != -1)
 	{
-		if (pipe(pipe_fd) == -1)
-			return (perror(SHELL_NAME": "), false);
-		ft_putstr_fd(command->heredoc, pipe_fd[1]);
-		close(pipe_fd[1]);
-		dup2(pipe_fd[0], STDIN_FILENO);
-		close(pipe_fd[0]);
+		dup2(command->heredoc_pipe, STDIN_FILENO);
+		close(command->heredoc_pipe);
+		command->heredoc_pipe = -1;
 	}
 	return (true);
 }

@@ -12,7 +12,7 @@ static t_command	*init_command(void)
 	command->input_file = NULL;
 	command->output_file = NULL;
 	command->append_output = false;
-	command->heredoc = NULL;
+	command->heredoc_pipe = -1;
 	command->delimiter = NULL;
 	return (command);
 }
@@ -34,10 +34,7 @@ static void	handle_redirect(t_command *command, t_token **tokens, int idx)
 		command->append_output = true;
 	}
 	else if (is_same_str(tokens[idx]->value, "<<"))
-	{
-		command->heredoc = ft_strdup("");
 		command->delimiter = ft_strdup(tokens[idx + 1]->value);
-	}
 }
 
 t_command	*create_command(t_token **tokens, int start, int end)

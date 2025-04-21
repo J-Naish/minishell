@@ -73,7 +73,7 @@ typedef struct s_command
 	t_str_heap		input_file;
 	t_str_heap		output_file;
 	bool			append_output;
-	t_str_heap		heredoc;
+	int				heredoc_pipe;
 	t_str_heap		delimiter;
 }	t_command;
 

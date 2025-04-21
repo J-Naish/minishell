@@ -75,8 +75,6 @@ void	run_command(t_command *command, char **envp)
 	int		saved_fds[2];
 	pid_t	pid;
 
-	if (is_heredoc(command))
-		heredoc(command);
 	if (command->is_redirect)
 	{
 		save_std_fds(saved_fds);

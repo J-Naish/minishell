@@ -30,7 +30,7 @@ bool	is_builtin_cmd(t_command *command)
 
 bool	is_heredoc(t_command *command)
 {
-	if (command->heredoc)
+	if (command->delimiter)
 		return (true);
 	else
 		return (false);

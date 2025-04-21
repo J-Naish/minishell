@@ -1,15 +1,5 @@
 #include "../../include/executor.h"
 
-static t_str_heap	join_free(t_str_heap s1, t_str_heap s2)
-{
-	t_str_heap	joined;
-
-	joined = ft_strjoin(s1, s2);
-	free(s1);
-	free(s2);
-	return (joined);
-}
-
 static bool	is_delimiter(t_str_heap line, t_str_heap delimiter)
 {
 	if (ft_strncmp(line, delimiter, ft_strlen(delimiter)) == 0
@@ -19,12 +9,17 @@ static bool	is_delimiter(t_str_heap line, t_str_heap delimiter)
 		return (false);
 }
 
-// signalでheredocを終了
-// heredocを活用できてない、ただ文字を保存してるだけ
 void	heredoc(t_command *command)
 {
 	t_str_heap	line;
+	int			pipe_fds[2];
 
+	ft_putstr_fd("heredoc is running\n", STDOUT_FILENO);
+	if (pipe(pipe_fds) == -1)
+	{
+		perror(SHELL_NAME": ");
+		return ;
+	}
 	while (1)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
@@ -36,6 +31,9 @@ void	heredoc(t_command *command)
 			free(line);
 			break ;
 		}
-		command->heredoc = join_free(command->heredoc, line);
+		ft_putstr_fd(line, pipe_fds[1]);
+		free(line);
 	}
+	close(pipe_fds[1]);
+	command->heredoc_pipe = pipe_fds[0];
 }

@@ -71,6 +71,25 @@ static int	execute_pipeline(t_pipeline *pipeline, char **envp)
 	return (EXIT_FAILURE);
 }
 
+static void	process_all_heredoc(t_pipeline **pipelines)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (pipelines[i])
+	{
+		j = 0;
+		while (pipelines[i]->commands[j])
+		{
+			if (is_heredoc(pipelines[i]->commands[j]))
+				heredoc(pipelines[i]->commands[j]);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	execute(t_pipeline **pipelines, char **envp)
 {
 	int					i;
@@ -78,6 +97,7 @@ void	execute(t_pipeline **pipelines, char **envp)
 	bool				should_execute;
 	t_chain_operator	prev_op;
 
+	process_all_heredoc(pipelines);
 	i = 0;
 	last_status = 0;
 	while (pipelines[i])

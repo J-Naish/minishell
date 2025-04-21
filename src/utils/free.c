@@ -35,8 +35,8 @@ void	free_command(t_command *command)
 		free(command->input_file);
 	if (command->output_file)
 		free(command->output_file);
-	if (command->heredoc)
-		free(command->heredoc);
+	if (command->heredoc_pipe != -1)
+		close(command->heredoc_pipe);
 	if (command->delimiter)
 		free(command->delimiter);
 	free(command);
