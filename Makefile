@@ -10,7 +10,7 @@ SRC := src/builtins/echo.c\
 		src/debugger/str.c\
 		src/debugger/token.c\
 		src/executor/build_pipeline.c\
-		src/executor/command.c\
+		src/executor/command_utils.c\
 		src/executor/execute.c\
 		src/executor/pipeline_utils.c\
 		src/executor/validate.c\
