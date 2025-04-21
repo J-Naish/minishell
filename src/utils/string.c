@@ -15,9 +15,9 @@ bool	is_same_str(const char *s1, const char *s2)
 		return (false);
 }
 
-bool	starts_with(const char *arg1, const char *arg2)
+bool	starts_with(const char *s, const char *prefix)
 {
-	if (ft_strncmp(arg1, arg2, ft_strlen(arg2)) == 0)
+	if (ft_strncmp(s, prefix, ft_strlen(prefix)) == 0)
 		return (true);
 	else
 		return (false);

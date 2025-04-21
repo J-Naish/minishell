@@ -33,7 +33,7 @@ t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str);
  */
 bool			is_same_str(const char *s1, const char *s2);
 
-bool			starts_with(const char *arg1, const char *arg2);
+bool			starts_with(const char *s, const char *prefix);
 
 /**
  * @brief シェル上で特別な意味を持つ文字かどうか判別する関数
