@@ -1,33 +1,11 @@
 #include "../../include/executor.h"
 
-// static bool	is_builtin_cmd(t_command *command)
-// {
-// 	char	*cmd_name;
-
-// 	cmd_name = command->args[0];
-// 	if (is_same_str(cmd_name, "echo"))
-// 		return (true);
-// 	else if (is_same_str(cmd_name, "cd"))
-// 		return (true);
-// 	else if (is_same_str(cmd_name, "pwd"))
-// 		return (true);
-// 	else if (is_same_str(cmd_name, "export"))
-// 		return (true);
-// 	else if (is_same_str(cmd_name, "unset"))
-// 		return (true);
-// 	else if (is_same_str(cmd_name, "env"))
-// 		return (true);
-// 	else if (is_same_str(cmd_name, "exit"))
-// 		return (true);
-// 	else
-// 		return (false);
-// }
-
 static void	run_command(t_command *command)
 {
+	// heredocがあればheredocを先に実行
 }
 
-static void	execute_pipeline(t_pipeline *pipeline)
+static int	execute_pipeline(t_pipeline *pipeline)
 {
 	int		i;
 	int		pipe_fds[2][2];
@@ -97,12 +75,26 @@ static void	execute_pipeline(t_pipeline *pipeline)
 
 void	execute(t_pipeline **pipelines)
 {
-	int	i;
+	int					i;
+	int					last_status;
+	bool				should_execute;
+	t_chain_operator	prev_op;
 
 	i = 0;
+	last_status = 0;
 	while (pipelines[i])
 	{
-
+		should_execute = true;
+		if (i != 0)
+		{
+			prev_op = pipelines[i - 1]->operator;
+			if (prev_op == CHAIN_AND && last_status != 0)
+				should_execute = false;
+			else if (prev_op == CHAIN_OR && last_status == 0)
+				should_execute = false;
+		}
+		if (should_execute)
+			last_status = execute_pipeline(pipelines[i]);
 		i++;
 	}
 }

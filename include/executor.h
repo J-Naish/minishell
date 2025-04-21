@@ -3,10 +3,12 @@
 
 # include "./minishell.h"
 
+t_pipeline	**build_pipeline(t_token **tokens);
+
 t_command	*create_command(t_token **tokens, int start, int end);
 t_command	**append_command(t_command **command_arr, t_command *command);
 
-t_pipeline	**build_pipeline(t_token **tokens);
+void		execute(t_pipeline **pipelines);
 
 t_pipeline	*init_pipeline(void);
 t_pipeline	**init_pipeline_arr(void);
