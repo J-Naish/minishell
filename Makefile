@@ -1,8 +1,13 @@
 NAME := minishell
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-SRC := src/builtins/echo.c\
+SRC := src/builtins/cd.c\
+		src/builtins/echo.c\
+		src/builtins/env.c\
 		src/builtins/exit.c\
+		src/builtins/export.c\
+		src/builtins/pwd.c\
+		src/builtins/unset.c\
 		src/debugger/bool.c\
 		src/debugger/command.c\
 		src/debugger/pipeline.c\
