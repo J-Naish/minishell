@@ -1,6 +1,6 @@
 #include "../../include/executor.h"
 
-static void	run_builtin(t_command *command)
+static void	run_builtin_command(t_command *command)
 {
 	char	*cmd_name;
 
@@ -21,6 +21,58 @@ static void	run_builtin(t_command *command)
 		cmd_exit(command);
 }
 
+t_str_heap	join_path(t_str dir, t_str cmd)
+{
+	t_str_heap	temp;
+	t_str_heap	full_path;
+
+	temp = ft_strjoin(dir, "/");
+	full_path = ft_strjoin(temp, cmd);
+	free(temp);
+	return (full_path);
+}
+
+static t_str_heap	find_command_path(t_command *command)
+{
+	t_str_heap		full_path;
+	t_str_arr_heap	paths;
+	t_str			cmd;
+	int				i;
+	t_str			env_path;
+
+	cmd = get_cmd_name(command);
+	if (ft_strchr(cmd, '/') || ft_strchr(cmd, '.'))
+		return (ft_strdup(cmd));
+	env_path = getenv("PATH");
+	if (!env_path)
+		return (NULL);
+	paths = ft_split(env_path, ':');
+	if (!paths)
+		return (NULL);
+	i = 0;
+	while (paths[i])
+	{
+		full_path = join_path(paths[i], cmd);
+		if (access(full_path, F_OK) == 0)
+			return (free_str_arr(paths), full_path);
+		free(full_path);
+		i++;
+	}
+	return (free_str_arr(paths), NULL);
+}
+
+void	run_external_command(t_command *command)
+{
+	t_str_heap	cmd_path;
+	char		**env; // envpをmainから持ってくる
+
+	cmd_path = find_command_path(command);
+	if (!cmd_path)
+		command_not_found(get_cmd_name(command));
+	execve(cmd_path, command->args, env);
+	system_error();
+}
+
 void	run_command(t_command *command)
 {
 	if (is_heredoc(command))
@@ -28,7 +80,8 @@ void	run_command(t_command *command)
 	print_command(command);
 	if (is_builtin_cmd(command))
 	{
-		run_builtin(command);
+		run_builtin_command(command);
 		return ;
 	}
+	run_external_command(command);
 }

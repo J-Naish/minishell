@@ -14,12 +14,20 @@ static void	free_all(t_pipeline **pls, t_token **tkns, t_str_heap prompt)
 	free(prompt);
 }
 
-int	main(void)
+static void	call_args(int argc, char **argv, char **envp)
+{
+	(void)argc;
+	(void)argv;
+	(void)envp;
+}
+
+int	main(int argc, char **argv, char **envp)
 {
 	t_str_heap	prompt;
 	t_token		**tokens;
 	t_pipeline	**pipelines;
 
+	call_args(argc, argv, envp);
 	init_signal();
 	while (1)
 	{
