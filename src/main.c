@@ -14,11 +14,10 @@ static void	free_all(t_pipeline **pls, t_token **tkns, t_str_heap prompt)
 	free(prompt);
 }
 
-static void	call_args(int argc, char **argv, char **envp)
+static void	call_args(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	(void)envp;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -27,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token		**tokens;
 	t_pipeline	**pipelines;
 
-	call_args(argc, argv, envp);
+	call_args(argc, argv);
 	init_signal();
 	while (1)
 	{
@@ -50,7 +49,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		pipelines = build_pipeline(tokens);
-		execute(pipelines);
+		execute(pipelines, envp);
 		rl_on_new_line();
 		free_all(pipelines, tokens, prompt);
 	}

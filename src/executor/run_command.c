@@ -61,19 +61,18 @@ static t_str_heap	find_command_path(t_command *command)
 	return (free_str_arr(paths), NULL);
 }
 
-void	run_external_command(t_command *command)
+void	run_external_command(t_command *command, char **envp)
 {
 	t_str_heap	cmd_path;
-	char		**env; // envpをmainから持ってくる
 
 	cmd_path = find_command_path(command);
 	if (!cmd_path)
 		command_not_found(get_cmd_name(command));
-	execve(cmd_path, command->args, env);
+	execve(cmd_path, command->args, envp);
 	system_error();
 }
 
-void	run_command(t_command *command)
+void	run_command(t_command *command, char **envp)
 {
 	if (is_heredoc(command))
 		heredoc(command);
@@ -83,5 +82,5 @@ void	run_command(t_command *command)
 		run_builtin_command(command);
 		return ;
 	}
-	run_external_command(command);
+	run_external_command(command, envp);
 }

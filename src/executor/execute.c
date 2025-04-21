@@ -1,6 +1,6 @@
 #include "../../include/executor.h"
 
-static int	execute_pipeline(t_pipeline *pipeline)
+static int	execute_pipeline(t_pipeline *pipeline, char **envp)
 {
 	int		i;
 	int		pipe_fds[2][2];
@@ -43,7 +43,7 @@ static int	execute_pipeline(t_pipeline *pipeline)
 				close(pipe_fds[active_pipe][0]);
 				close(pipe_fds[active_pipe][1]);
 			}
-			run_command(pipeline->commands[i]);
+			run_command(pipeline->commands[i], envp);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -68,7 +68,7 @@ static int	execute_pipeline(t_pipeline *pipeline)
 	return (EXIT_FAILURE);
 }
 
-void	execute(t_pipeline **pipelines)
+void	execute(t_pipeline **pipelines, char **envp)
 {
 	int					i;
 	int					last_status;
@@ -89,7 +89,7 @@ void	execute(t_pipeline **pipelines)
 				should_execute = false;
 		}
 		if (should_execute)
-			last_status = execute_pipeline(pipelines[i]);
+			last_status = execute_pipeline(pipelines[i], envp);
 		i++;
 	}
 }
