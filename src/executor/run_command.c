@@ -72,12 +72,35 @@ void	run_external_command(t_command *command, char **envp)
 
 void	run_command(t_command *command, char **envp)
 {
+	int		saved_fds[2];
+	pid_t	pid;
+
 	if (is_heredoc(command))
 		heredoc(command);
-	if (is_builtin_cmd(command))
+	if (command->is_redirect)
 	{
-		run_builtin_command(command);
-		return ;
+		save_std_fds(saved_fds);
+		if (!setup_input_redirect(command) || !setup_output_redirect(command))
+		{
+			restore_std_fds(saved_fds);
+			return ;
+		}
 	}
-	run_external_command(command, envp);
+	if (is_builtin_cmd(command))
+		run_builtin_command(command);
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			run_external_command(command, envp);
+			exit(EXIT_FAILURE);
+		}
+		else if (pid > 0)
+			wait(NULL);
+		else
+			perror(SHELL_NAME": ");
+	}
+	if (command->is_redirect)
+		restore_std_fds(saved_fds);
 }
