@@ -53,7 +53,7 @@ int	main(int argc, char **argv, char **envp)
 		free(prompt);
 		execute(pipelines, envp);
 		rl_on_new_line();
-		free_all(pipelines, tokens, prompt);
+		free_pipelines(pipelines);
 	}
 	return (EXIT_SUCCESS);
 }
