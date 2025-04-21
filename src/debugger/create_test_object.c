@@ -23,6 +23,7 @@ t_command	*create_test_command(t_str prompt)
 	int			i;
 
 	tokens = parse(prompt);
+	i = 0;
 	while (tokens[i])
 		i++;
 	command = create_command(tokens, 0, i);
