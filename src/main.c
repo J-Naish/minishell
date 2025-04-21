@@ -41,7 +41,7 @@ int	main(void)
 			continue ;
 		}
 		pipelines = build_pipeline(tokens);
-		print_pipelines(pipelines);
+		execute(pipelines);
 		rl_on_new_line();
 		free_all(pipelines, tokens, prompt);
 	}
