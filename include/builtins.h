@@ -3,6 +3,6 @@
 
 # include "./minishell.h"
 
-bool	is_builtin(t_token *token);
+void	cmd_exit(t_command *command);
 
 #endif
