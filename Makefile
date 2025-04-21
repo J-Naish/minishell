@@ -10,6 +10,7 @@ SRC := src/builtins/cd.c\
 		src/builtins/unset.c\
 		src/debugger/bool.c\
 		src/debugger/command.c\
+		src/debugger/create_test_object.c\
 		src/debugger/number.c\
 		src/debugger/pipeline.c\
 		src/debugger/str_arr.c\
