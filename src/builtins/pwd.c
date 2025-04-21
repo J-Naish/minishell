@@ -20,3 +20,11 @@ void	cmd_pwd(t_command *command)
 	ft_putstr_fd(cwd, STDOUT_FILENO);
 	ft_putstr_fd("\n", STDOUT_FILENO);
 }
+
+// int main() {
+// 	t_command	*command;
+
+// 	command = create_test_command("pwd");
+// 	cmd_pwd(command);
+// 	free_command(command);
+// }
