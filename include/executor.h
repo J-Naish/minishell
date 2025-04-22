@@ -21,6 +21,7 @@ void		restore_std_fds(int saved_fds[2]);
 bool		setup_input_redirect(t_command *command);
 bool		setup_output_redirect(t_command *command);
 
+void		run_builtin_command(t_command *command);
 void		run_command(t_command *command, char **envp);
 
 bool		validate_tokens(t_token **tokens);

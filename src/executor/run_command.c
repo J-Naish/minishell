@@ -1,6 +1,6 @@
 #include "../../include/executor.h"
 
-static void	run_builtin_command(t_command *command)
+void	run_builtin_command(t_command *command)
 {
 	char	*cmd_name;
 
@@ -17,9 +17,11 @@ static void	run_builtin_command(t_command *command)
 		cmd_unset(command);
 	else if (is_same_str(cmd_name, "env"))
 		cmd_env(command);
+	else if (is_same_str(cmd_name, "exit"))
+		cmd_exit(command);
 }
 
-t_str_heap	join_path(t_str dir, t_str cmd)
+static t_str_heap	join_path(t_str dir, t_str cmd)
 {
 	t_str_heap	temp;
 	t_str_heap	full_path;
@@ -59,7 +61,7 @@ static t_str_heap	find_command_path(t_command *command)
 	return (free_str_arr(paths), NULL);
 }
 
-void	run_external_command(t_command *command, char **envp)
+static void	run_external_command(t_command *command, char **envp)
 {
 	t_str_heap	cmd_path;
 
@@ -84,9 +86,7 @@ void	run_command(t_command *command, char **envp)
 			return ;
 		}
 	}
-	if (is_builtin_cmd(command))
-		run_builtin_command(command);
-	else
+	if (!is_builtin_cmd(command))
 	{
 		pid = fork();
 		if (pid == 0)
