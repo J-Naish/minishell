@@ -31,24 +31,6 @@ bool	has_invalid_quote(t_str_heap prompt)
 	return (false);
 }
 
-t_str_heap	extract_str(t_str_heap prompt, int length)
-{
-	t_str_heap	str;
-	int			i;
-
-	str = (t_str_heap)malloc(sizeof(char) * (length + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < length && prompt[i])
-	{
-		str[i] = prompt[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 int	next_quote_index(t_str_heap prompt, char quote)
 {
 	int	i;

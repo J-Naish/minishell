@@ -33,6 +33,24 @@ bool	includes(const char *s, char c)
 		return (false);
 }
 
+t_str_heap	extract_str(t_str s, int length)
+{
+	t_str_heap	extracted;
+	int			i;
+
+	extracted = (t_str_heap)malloc(sizeof(char) * (length + 1));
+	if (!extracted)
+		return (NULL);
+	i = 0;
+	while (i < length && s[i])
+	{
+		extracted[i] = s[i];
+		i++;
+	}
+	extracted[i] = '\0';
+	return (extracted);
+}
+
 // int main() {
 // 	print_bool((is_same_str("test", "test")));
 // 	print_bool((is_same_str("test1", "test")));

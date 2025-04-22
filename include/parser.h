@@ -4,7 +4,6 @@
 # include "./minishell.h"
 
 bool			has_invalid_quote(t_str_heap prompt);
-t_str_heap		extract_str(t_str_heap prompt, int length);
 int				next_quote_index(t_str_heap prompt, char quote);
 int				next_index(t_str_heap prompt);
 
