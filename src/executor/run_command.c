@@ -1,6 +1,6 @@
 #include "../../include/executor.h"
 
-void	run_builtin_command(t_command *command)
+void	run_builtin_command(t_command *command, char **envp)
 {
 	char	*cmd_name;
 
@@ -16,7 +16,7 @@ void	run_builtin_command(t_command *command)
 	else if (is_same_str(cmd_name, "unset"))
 		cmd_unset(command);
 	else if (is_same_str(cmd_name, "env"))
-		cmd_env(command);
+		cmd_env(command, envp);
 	else if (is_same_str(cmd_name, "exit"))
 		cmd_exit(command);
 }
@@ -90,7 +90,7 @@ void	run_command(t_command *command, char **envp)
 	if (pid == 0)
 	{
 		if (is_builtin_cmd(command))
-			run_builtin_command(command);
+			run_builtin_command(command, envp);
 		else
 			run_external_command(command, envp);
 	}
