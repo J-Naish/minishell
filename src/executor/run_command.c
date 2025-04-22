@@ -86,19 +86,18 @@ void	run_command(t_command *command, char **envp)
 			return ;
 		}
 	}
-	if (!is_builtin_cmd(command))
+	pid = fork();
+	if (pid == 0)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			run_external_command(command, envp);
-			exit(EXIT_FAILURE);
-		}
-		else if (pid > 0)
-			wait(NULL);
+		if (is_builtin_cmd(command))
+			run_builtin_command(command);
 		else
-			perror(SHELL_NAME": ");
+			run_external_command(command, envp);
 	}
+	else if (pid > 0)
+		wait(NULL);
+	else
+		perror(SHELL_NAME": ");
 	if (command->is_redirect)
 		restore_std_fds(saved_fds);
 }
