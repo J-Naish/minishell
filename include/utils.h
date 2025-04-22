@@ -35,6 +35,8 @@ bool			is_same_str(const char *s1, const char *s2);
 
 bool			starts_with(const char *s, const char *prefix);
 
+bool			includes(const char *s, char c);
+
 /**
  * @brief シェル上で特別な意味を持つ文字かどうか判別する関数
  * 

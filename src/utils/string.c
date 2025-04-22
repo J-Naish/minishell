@@ -23,6 +23,16 @@ bool	starts_with(const char *s, const char *prefix)
 		return (false);
 }
 
+bool	includes(const char *s, char c)
+{
+	if (!s)
+		return (false);
+	if (ft_strchr(s, c))
+		return (true);
+	else
+		return (false);
+}
+
 bool	is_special_char(char c)
 {
 	return (c == '|' || c == '&' || c == '>' || c == '<');
