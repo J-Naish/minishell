@@ -1,6 +1,5 @@
 #include "../../include/builtins.h"
 
-// これだけだとシェルからは抜け出せない
 void	cmd_exit(t_command *command)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
