@@ -13,7 +13,9 @@ static int	execute_pipeline(t_pipeline *pipeline, char **envp)
 	if (get_command_count(pipeline) == 1
 		&& is_builtin_cmd(pipeline->commands[0]))
 	{
-		run_builtin_command(pipeline->commands[0], envp);
+		if (is_same_str(pipeline->commands[0]->args[0], "exit"))
+			cmd_exit(pipeline->commands[0]);
+		run_command(pipeline->commands[0], envp);
 		return (EXIT_SUCCESS);
 	}
 	active_pipe = 0;
