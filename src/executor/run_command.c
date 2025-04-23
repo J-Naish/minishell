@@ -86,14 +86,16 @@ void	run_command(t_command *command, char **envp)
 			return ;
 		}
 	}
+	if (is_builtin_cmd(command))
+	{
+		run_builtin_command(command, envp);
+		if (command->is_redirect)
+			restore_std_fds(saved_fds);
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
-	{
-		if (is_builtin_cmd(command))
-			run_builtin_command(command, envp);
-		else
-			run_external_command(command, envp);
-	}
+		run_external_command(command, envp);
 	else if (pid > 0)
 		wait(NULL);
 	else
