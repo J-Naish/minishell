@@ -103,6 +103,8 @@ void	replace_dollar_word(t_token *token)
 	t_str_arr_heap	splitted;
 	int				i;
 
+	if (token->quote == SINGLE_QUOTE)
+		return ;
 	splitted = split_words(token->value);
 	i = 0;
 	while (splitted[i])
