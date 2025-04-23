@@ -36,6 +36,7 @@ SRC := src/builtins/cd.c\
 		src/utils/get_next_line.c\
 		src/utils/initialize_shell.c\
 		src/utils/pipeline.c\
+		src/utils/signal_handler.c\
 		src/utils/str_arr.c\
 		src/utils/string.c\
 		src/utils/token.c\
