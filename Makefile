@@ -26,8 +26,10 @@ SRC := src/builtins/cd.c\
 		src/executor/validate.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
+		src/parser/replace_dollar.c\
 		src/parser/token_utils.c\
 		src/parser/tokenize.c\
+		src/utils/char.c\
 		src/utils/command.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
