@@ -25,7 +25,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		prompt = readline(SHELL_NAME"$ ");
 		if (!prompt)
+		{
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			exit(EXIT_SUCCESS);
+		}
 		if (!*prompt)
 		{
 			free(prompt);
