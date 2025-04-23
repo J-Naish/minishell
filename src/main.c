@@ -21,6 +21,7 @@ int	main(int argc, char **argv, char **envp)
 
 	call_args(argc, argv);
 	init_signal();
+	setup_signals();
 	while (1)
 	{
 		prompt = readline(SHELL_NAME"$ ");
