@@ -15,7 +15,7 @@ static void	append_quoted_word(t_token ***tokens,
 		quote_type = QUOTE_NONE;
 	(*i)++;
 	length = next_quote_index(&prompt[*i], quote);
-	temp = ft_substr(&prompt[*i], 0, (size_t)length);
+	temp = ft_substr(prompt, *i, (size_t)length);
 	*tokens = append_token(*tokens, temp, TOKEN_WORD, quote_type);
 	free(temp);
 	*i += length + 1;
@@ -36,7 +36,7 @@ static void	append_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 		type = TOKEN_CHAIN;
 	else
 		type = TOKEN_REDIRECT;
-	temp = ft_substr(&prompt[*i], 0, (size_t)length);
+	temp = ft_substr(prompt, *i, (size_t)length);
 	*tokens = append_token(*tokens, temp, type, QUOTE_NONE);
 	free(temp);
 	*i += length;
@@ -48,7 +48,7 @@ static void	append_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 	t_str_heap	temp;
 
 	length = next_index(&prompt[*i]);
-	temp = ft_substr(&prompt[*i], 0, (size_t)length);
+	temp = ft_substr(prompt, *i, (size_t)length);
 	*tokens = append_token(*tokens, temp, TOKEN_WORD, QUOTE_NONE);
 	free(temp);
 	*i += length;
@@ -79,30 +79,30 @@ t_token	**tokenize(t_str_heap prompt)
 	return (tokens);
 }
 
-// int main() {
-// 	t_token **test;
-// 	test = tokenize("echo hello world");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo \"hello world\"");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo 'hello world'");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo \"it's a test\" 'of tokenize function'");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo	\n 'hello	world'    a	");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo||hello");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo|&hello");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// 	test = tokenize("echo|&hello");
-// 	print_tokens(test);
-// 	free_tokens(test);
-// }
+int main() {
+	t_token **test;
+	test = tokenize("echo hello world");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo \"hello world\"");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo 'hello world'");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo \"it's a test\" 'of tokenize function'");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo	\n 'hello	world'    a	");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo||hello");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo|&hello");
+	print_tokens(test);
+	free_tokens(test);
+	test = tokenize("echo|&hello");
+	print_tokens(test);
+	free_tokens(test);
+}
