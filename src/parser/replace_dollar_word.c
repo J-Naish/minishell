@@ -77,9 +77,29 @@ static t_str_arr_heap	split_words(t_str s)
 	return (chunks);
 }
 
-void	replace_dollar(t_token *token)
+static void	convert_dollar_word(t_str_heap *word)
 {
-	t_str			env_var;
+	t_str		env_var;
+	t_str_heap	new;
+
+	if (is_same_str(*word, "$?"))
+		new	= ft_itoa(0); // TODO: exitステータスに変更
+	else if (starts_with(*word, "$") && ft_strlen(*word) > 1)
+	{
+		env_var = getenv((*word) + 1);
+		if (env_var)
+			new = ft_strdup(env_var);
+		else
+			new = ft_strdup("");
+	}
+	else
+		return ;
+	free(*word);
+	*word = new;
+}
+
+void	replace_dollar_word(t_token *token)
+{
 	t_str_arr_heap	splitted;
 	int				i;
 
@@ -87,20 +107,7 @@ void	replace_dollar(t_token *token)
 	i = 0;
 	while (splitted[i])
 	{
-		if (is_same_str(splitted[i], "$?"))
-		{
-			free(splitted[i]);
-			splitted[i] = ft_itoa(0); // 一旦0に変換
-		}
-		else if (starts_with(splitted[i], "$") && ft_strlen(splitted[i]) != 1)
-		{
-			env_var = getenv(&splitted[i][1]);
-			free(splitted[i]);
-			if (!getenv(&splitted[i][1]))
-				splitted[i] = ft_strdup("");
-			else
-				splitted[i] = ft_strdup(env_var);
-		}
+		convert_dollar_word(&splitted[i]);
 		i++;
 	}
 	free(token->value);
