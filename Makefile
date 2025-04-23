@@ -34,6 +34,7 @@ SRC := src/builtins/cd.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
 		src/utils/get_next_line.c\
+		src/utils/initialize_shell.c\
 		src/utils/pipeline.c\
 		src/utils/str_arr.c\
 		src/utils/string.c\

@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		prompt = readline(SHELL_NAME"$ ");
 		if (!prompt)
-			continue ;
+			exit(EXIT_SUCCESS);
 		if (!*prompt)
 		{
 			free(prompt);
