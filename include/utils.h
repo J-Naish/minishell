@@ -24,6 +24,7 @@ int				get_command_count(t_pipeline *pipeline);
 
 t_str_arr_heap	init_str_arr(void);
 t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str);
+t_str_heap		join_str_arr(t_str_arr str_arr);
 
 /**
  * @brief 2つの文字列が完全一致するか検証する関数
