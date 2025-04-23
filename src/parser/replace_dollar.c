@@ -1,24 +1,33 @@
 #include "../../include/parser.h"
 
-static int	get_word_length(t_str s)
+static int	get_chunk_length(t_str s)
 {
 	int	i;
 
 	i = 0;
-	if (is_space(s[0]))
+	if (s[0] == '$')
+	{
+		while (s[i] && !is_space(s[i]))
+		{
+			if (s[i + 1] && s[i + 1] == '?')
+				return (2);
+			i++;
+		}
+	}
+	else if (is_space(s[0]))
 	{
 		while (s[i] && is_space(s[i]))
 			i++;
 	}
 	else
 	{
-		while (s[i] && !is_space(s[i]))
+		while (s[i] && !is_space(s[i]) && s[i] != '$')
 			i++;
 	}
 	return (i);
 }
 
-static int	word_count(t_str s)
+static int	chunk_count(t_str s)
 {
 	int	i;
 	int	count;
@@ -30,12 +39,12 @@ static int	word_count(t_str s)
 		if (is_space(s[i]))
 		{
 			count++;
-			i += get_word_length(&s[i]);
+			i += get_chunk_length(&s[i]);
 		}
 		else
 		{
 			count++;
-			i += get_word_length(&s[i]);
+			i += get_chunk_length(&s[i]);
 		}
 	}
 	return (count);
@@ -43,29 +52,29 @@ static int	word_count(t_str s)
 
 static t_str_arr_heap	split_words(t_str s)
 {
-	t_str_arr_heap	str_arr;
+	t_str_arr_heap	chunks;
 	int				size;
 	int				i;
 	int				j;
 	int				length;
 
-	size = word_count(s);
-	str_arr = (t_str_arr_heap)malloc(sizeof(t_str_heap) * (size + 1));
-	if (!str_arr)
+	size = chunk_count(s);
+	chunks = (t_str_arr_heap)malloc(sizeof(t_str_heap) * (size + 1));
+	if (!chunks)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (s[i])
 	{
-		length = get_word_length(&s[i]);
-		str_arr[j] = ft_substr(s, i, length);
-		if (!str_arr[j])
-			return (free_str_arr(str_arr), NULL);
+		length = get_chunk_length(&s[i]);
+		chunks[j] = ft_substr(s, i, length);
+		if (!chunks[j])
+			return (free_str_arr(chunks), NULL);
 		i += length;
 		j++;
 	}
-	str_arr[j] = NULL;
-	return (str_arr);
+	chunks[j] = NULL;
+	return (chunks);
 }
 
 void	replace_dollar(t_token *token)
@@ -100,11 +109,17 @@ void	replace_dollar(t_token *token)
 }
 
 // int main() {
-// 	printf("%d\n", word_count(" he   l 	llo "));
-// 	printf("%d\n", word_count("$SHELL test    hello 	$?"));
-// 	printf("%d\n", word_count(" "));
-// 	printf("%d\n", word_count("hello"));
-// 	printf("%d\n", word_count("hello world"));
+// 	printf("%d\n", chunk_count(" he   l 	llo ") == 7);
+// 	printf("%d\n", chunk_count("$SHELL test    hello 	$?") == 7);
+// 	printf("%d\n", chunk_count(" ") == 1);
+// 	printf("%d\n", chunk_count("hello") == 1);
+// 	printf("%d\n", chunk_count("hello world") == 3);
+// 	printf("%d\n", chunk_count("echo test$SHELL") == 4);
+// 	printf("%d\n", chunk_count("test$SHELLvdsav") == 2);
+// 	printf("%d\n", chunk_count("test$?test") == 3);
+// 	printf("%d\n", chunk_count("$? ") == 2);
+// 	printf("%d\n", chunk_count("$?") == 1);
+// 	printf("%d\n", chunk_count("echo $?") == 3);
 // }
 // int main() {
 // 	char **test;
@@ -130,6 +145,16 @@ void	replace_dollar(t_token *token)
 // 	ft_putstr_fd("\n", STDOUT_FILENO);
 // 	// test 5
 // 	test = split_words("hello world");
+// 	print_str_arr(test);
+// 	free_str_arr(test);
+// 	ft_putstr_fd("\n", STDOUT_FILENO);
+// 	// test 6
+// 	test = split_words("echo cnsdkj$SHELLcsn");
+// 	print_str_arr(test);
+// 	free_str_arr(test);
+// 	ft_putstr_fd("\n", STDOUT_FILENO);
+// 	// test 7
+// 	test = split_words("echo cnsdkj$?csn");
 // 	print_str_arr(test);
 // 	free_str_arr(test);
 // 	ft_putstr_fd("\n", STDOUT_FILENO);
