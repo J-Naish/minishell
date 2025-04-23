@@ -8,7 +8,7 @@ static void	append_quoted_word(t_token ***tokens,
 
 	(*i)++;
 	length = next_quote_index(&prompt[*i], quote);
-	temp = extract_str(&prompt[*i], length);
+	temp = ft_substr(&prompt[*i], 0, (size_t)length);
 	*tokens = append_token(*tokens, temp, TOKEN_WORD);
 	free(temp);
 	*i += length + 1;
@@ -29,7 +29,7 @@ static void	append_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 		type = TOKEN_CHAIN;
 	else
 		type = TOKEN_REDIRECT;
-	temp = extract_str(&prompt[*i], length);
+	temp = ft_substr(&prompt[*i], 0, (size_t)length);
 	*tokens = append_token(*tokens, temp, type);
 	free(temp);
 	*i += length;
@@ -41,7 +41,7 @@ static void	append_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 	t_str_heap	temp;
 
 	length = next_index(&prompt[*i]);
-	temp = extract_str(&prompt[*i], length);
+	temp = ft_substr(&prompt[*i], 0, (size_t)length);
 	*tokens = append_token(*tokens, temp, TOKEN_WORD);
 	free(temp);
 	*i += length;
@@ -74,28 +74,28 @@ t_token	**tokenize(t_str_heap prompt)
 
 // int main() {
 // 	t_token **test;
-// 	test = split_prompt("echo hello world");
+// 	test = tokenize("echo hello world");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo \"hello world\"");
+// 	test = tokenize("echo \"hello world\"");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo 'hello world'");
+// 	test = tokenize("echo 'hello world'");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo \"it's a test\" 'of split command'");
+// 	test = tokenize("echo \"it's a test\" 'of tokenize function'");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo	\n 'hello	world'    a	");
+// 	test = tokenize("echo	\n 'hello	world'    a	");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo||hello");
+// 	test = tokenize("echo||hello");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo|&hello");
+// 	test = tokenize("echo|&hello");
 // 	print_tokens(test);
 // 	free_tokens(test);
-// 	test = split_prompt("echo|&hello");
+// 	test = tokenize("echo|&hello");
 // 	print_tokens(test);
 // 	free_tokens(test);
 // }

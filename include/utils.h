@@ -37,8 +37,6 @@ bool			starts_with(const char *s, const char *prefix);
 
 bool			includes(const char *s, char c);
 
-t_str_heap		extract_str(t_str s, int length);
-
 /**
  * @brief シェル上で特別な意味を持つ文字かどうか判別する関数
  * 
