@@ -12,6 +12,7 @@ static void	signal_handler(int signum)
 	}
 	else if (signum == SIGQUIT)
 	{
+		rl_redisplay();
 	}
 }
 
@@ -23,4 +24,5 @@ void	setup_signals(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 }
