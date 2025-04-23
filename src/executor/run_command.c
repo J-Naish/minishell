@@ -69,7 +69,12 @@ static void	run_external_command(t_command *command, char **envp)
 	if (!cmd_path)
 		command_not_found(get_cmd_name(command));
 	execve(cmd_path, command->args, envp);
-	system_error();
+	put_error(SHELL_NAME": ");
+	put_error(cmd_path);
+	put_error(": ");
+	put_error(strerror(errno));
+	put_error("\n");
+	exit(127);
 }
 
 void	run_command(t_command *command, char **envp)

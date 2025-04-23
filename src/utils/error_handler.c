@@ -7,10 +7,10 @@ void	put_error(char *s)
 
 void	command_not_found(const t_str command)
 {
-	put_error(SHELL_NAME": Command not found: ");
+	put_error(SHELL_NAME": ");
 	put_error(command);
-	put_error("\n");
-	exit(EXIT_COMMAND_NOT_FOUND);
+	put_error(": command not found\n");
+	exit(EXIT_NOT_FOUND);
 }
 
 void	unable_to_execute(const t_str file_path)
