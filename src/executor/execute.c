@@ -120,4 +120,5 @@ void	execute(t_pipeline **pipelines, char **envp)
 			last_status = execute_pipeline(pipelines[i], envp);
 		i++;
 	}
+	g_signal.status = last_status;
 }
