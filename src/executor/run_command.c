@@ -75,7 +75,6 @@ static void	run_external_command(t_command *command, char **envp)
 void	run_command(t_command *command, char **envp)
 {
 	int		saved_fds[2];
-	pid_t	pid;
 
 	if (command->is_redirect)
 	{
@@ -87,19 +86,9 @@ void	run_command(t_command *command, char **envp)
 		}
 	}
 	if (is_builtin_cmd(command))
-	{
 		run_builtin_command(command, envp);
-		if (command->is_redirect)
-			restore_std_fds(saved_fds);
-		return ;
-	}
-	pid = fork();
-	if (pid == 0)
-		run_external_command(command, envp);
-	else if (pid > 0)
-		wait(NULL);
 	else
-		perror(SHELL_NAME": ");
+		run_external_command(command, envp);
 	if (command->is_redirect)
 		restore_std_fds(saved_fds);
 }
