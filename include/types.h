@@ -53,6 +53,13 @@ typedef enum e_token_type
 	TOKEN_CHAIN
 }	t_token_type;
 
+typedef enum e_token_quote
+{
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+	QUOTE_NONE,
+}	t_token_quote;
+
 /**
  * @brief プロンプトを分割した際の単位
  * 
@@ -64,6 +71,7 @@ typedef struct s_token
 {
 	t_token_type	type;
 	t_str_heap		value;
+	t_token_quote	quote;
 }	t_token;
 
 typedef struct s_command

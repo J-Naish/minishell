@@ -15,6 +15,6 @@ t_token			**tokenize(t_str_heap prompt);
 
 t_token			**init_tokens(void);
 t_token			**append_token(t_token **tokens,
-					char *value, t_token_type type);
+					char *value, t_token_type type, t_token_quote quote);
 
 #endif

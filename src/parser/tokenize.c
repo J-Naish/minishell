@@ -3,13 +3,20 @@
 static void	append_quoted_word(t_token ***tokens,
 	t_str_heap prompt, int *i, char quote)
 {
-	int			length;
-	t_str_heap	temp;
+	int				length;
+	t_str_heap		temp;
+	t_token_quote	quote_type;
 
+	if (quote == '\'')
+		quote_type = SINGLE_QUOTE;
+	else if (quote == '\"')
+		quote_type = DOUBLE_QUOTE;
+	else
+		quote_type = QUOTE_NONE;
 	(*i)++;
 	length = next_quote_index(&prompt[*i], quote);
 	temp = ft_substr(&prompt[*i], 0, (size_t)length);
-	*tokens = append_token(*tokens, temp, TOKEN_WORD);
+	*tokens = append_token(*tokens, temp, TOKEN_WORD, quote_type);
 	free(temp);
 	*i += length + 1;
 }
@@ -30,7 +37,7 @@ static void	append_special_char(t_token ***tokens, t_str_heap prompt, int *i)
 	else
 		type = TOKEN_REDIRECT;
 	temp = ft_substr(&prompt[*i], 0, (size_t)length);
-	*tokens = append_token(*tokens, temp, type);
+	*tokens = append_token(*tokens, temp, type, QUOTE_NONE);
 	free(temp);
 	*i += length;
 }
@@ -42,7 +49,7 @@ static void	append_regular_word(t_token ***tokens, t_str_heap prompt, int *i)
 
 	length = next_index(&prompt[*i]);
 	temp = ft_substr(&prompt[*i], 0, (size_t)length);
-	*tokens = append_token(*tokens, temp, TOKEN_WORD);
+	*tokens = append_token(*tokens, temp, TOKEN_WORD, QUOTE_NONE);
 	free(temp);
 	*i += length;
 }

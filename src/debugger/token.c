@@ -14,6 +14,20 @@ static void	print_token_type(t_token_type token_type)
 	ft_putstr_fd(RESET, STDOUT_FILENO);
 }
 
+static void	print_token_quote(t_token_quote quote)
+{
+	ft_putstr_fd(YELLOW, STDOUT_FILENO);
+	if (quote == SINGLE_QUOTE)
+		ft_putstr_fd("SINGLE", STDOUT_FILENO);
+	else if (quote == DOUBLE_QUOTE)
+		ft_putstr_fd("DOUBLE", STDOUT_FILENO);
+	else if (quote == QUOTE_NONE)
+		ft_putstr_fd("NONE", STDOUT_FILENO);
+	else
+		ft_putstr_fd(BLACK"undefined", STDOUT_FILENO);
+	ft_putstr_fd(RESET, STDOUT_FILENO);
+}
+
 void	print_token(t_token *token)
 {
 	if (!token)
@@ -26,6 +40,8 @@ void	print_token(t_token *token)
 	ft_putstr_fd(", value: "GREEN"'", STDOUT_FILENO);
 	ft_putstr_fd(token->value, STDOUT_FILENO);
 	ft_putstr_fd("'"RESET, STDOUT_FILENO);
+	ft_putstr_fd(", quote: ", STDOUT_FILENO);
+	print_token_quote(token->quote);
 	ft_putstr_fd(" }", STDOUT_FILENO);
 }
 
@@ -53,6 +69,7 @@ void	print_tokens(t_token **tokens)
 // int main() {
 // 	t_token	token;
 // 	token.value = "test";
-// 	token.type = REDIRECT;
+// 	token.type = TOKEN_REDIRECT;
+// 	token.quote = SINGLE_QUOTE;
 // 	print_token(&token);
 // }
