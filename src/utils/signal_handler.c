@@ -5,8 +5,8 @@ static void	signal_handler(int signum)
 	if (signum == SIGINT)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_replace_line("", 0);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 		g_signal.status = 1;
 	}
@@ -21,6 +21,6 @@ void	setup_signals(void)
 
 	sa.sa_handler = signal_handler;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = SA_RESTART;
+	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
 }
