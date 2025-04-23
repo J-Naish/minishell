@@ -79,30 +79,30 @@ t_token	**tokenize(t_str_heap prompt)
 	return (tokens);
 }
 
-int main() {
-	t_token **test;
-	test = tokenize("echo hello world");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo \"hello world\"");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo 'hello world'");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo \"it's a test\" 'of tokenize function'");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo	\n 'hello	world'    a	");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo||hello");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo|&hello");
-	print_tokens(test);
-	free_tokens(test);
-	test = tokenize("echo|&hello");
-	print_tokens(test);
-	free_tokens(test);
-}
+// int main() {
+// 	t_token **test;
+// 	test = tokenize("echo hello world");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo \"hello world\"");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo 'hello world'");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo \"it's a test\" 'of tokenize function'");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo	\n 'hello	world'    a	");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo||hello");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo|&hello");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// 	test = tokenize("echo|&hello");
+// 	print_tokens(test);
+// 	free_tokens(test);
+// }
