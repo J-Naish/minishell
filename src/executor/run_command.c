@@ -74,7 +74,10 @@ static void	run_external_command(t_command *command, char **envp)
 	put_error(": ");
 	put_error(strerror(errno));
 	put_error("\n");
-	exit(127);
+	if (access(cmd_path, F_OK) == 0 && access(cmd_path, X_OK) != 0)
+		exit(EXIT_UNABLE_TO_EXECUTE);
+	else
+		exit(EXIT_NOT_FOUND);
 }
 
 void	run_command(t_command *command, char **envp)
