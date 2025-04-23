@@ -24,7 +24,10 @@ void	heredoc(t_command *command)
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
+		{
+			ft_putstr_fd("\n", STDOUT_FILENO);
 			break ;
+		}
 		if (is_delimiter(line, command->delimiter))
 		{
 			free(line);
