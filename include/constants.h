@@ -24,6 +24,10 @@
 #  define EXIT_SIGNAL_BASE 128
 # endif
 
+# ifndef EXIT_INVALID_ARGS
+#  define EXIT_INVALID_ARGS 255
+# endif
+
 // log styles
 # ifndef RED
 #  define RED "\033[31m"
