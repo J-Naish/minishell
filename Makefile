@@ -63,7 +63,7 @@ ifeq ($(UNAME_S), Darwin)
 	LEAK_CHECK = leaks -quiet --atExit --
 endif
 
-.PHONY: all clean fclean re submit
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
