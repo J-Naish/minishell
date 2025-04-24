@@ -1,4 +1,4 @@
-#include "../../include/utils.h"
+#include "../../include/misc.h"
 
 void	initialize_shell(void)
 {

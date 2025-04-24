@@ -24,6 +24,8 @@ SRC := src/builtins/cd.c\
 		src/executor/redirect.c\
 		src/executor/run_command.c\
 		src/executor/validate.c\
+		src/misc/initialize_shell.c\
+		src/misc/signal_handler.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
 		src/parser/replace_dollar_word.c\
@@ -34,9 +36,7 @@ SRC := src/builtins/cd.c\
 		src/utils/error_handler.c\
 		src/utils/free.c\
 		src/utils/get_next_line.c\
-		src/utils/initialize_shell.c\
 		src/utils/pipeline.c\
-		src/utils/signal_handler.c\
 		src/utils/str_arr.c\
 		src/utils/string.c\
 		src/utils/token.c\
