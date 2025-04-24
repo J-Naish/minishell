@@ -1,5 +1,10 @@
 # Minishell Project
 
+## 立ち上げ方
+1. `chmod +x start.sh`
+2. Dockerエンジンを起動
+3. `bash start.sh`
+
 ## 規約
 - 作業はminishellブランチにて行う
 - 42ヘッダーは提出前に追加する、作業中はなしで進めていく
