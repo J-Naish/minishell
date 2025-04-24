@@ -1,6 +1,8 @@
 NAME := minishell
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
+READLINEFLAG := -lreadline
+CFLAGS += $(READLINEFLAG)
 SRC := src/builtins/cd.c\
 		src/builtins/echo.c\
 		src/builtins/env.c\
@@ -26,6 +28,7 @@ SRC := src/builtins/cd.c\
 		src/executor/validate.c\
 		src/misc/initialize_shell.c\
 		src/misc/signal_handler.c\
+		src/misc/wildcard.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
 		src/parser/replace_dollar_word.c\
@@ -67,7 +70,7 @@ all: $(NAME)
 
 $(NAME): $(BUILD)
 	make all -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(BUILD) $(LIBFT) -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(BUILD) $(LIBFT) -o $(NAME)
 
 $(BUILD_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(@D)
