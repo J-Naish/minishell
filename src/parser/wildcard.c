@@ -68,26 +68,19 @@ static t_str_arr_heap	collect_matches(DIR *dir, t_str pattern)
 	return (matches);
 }
 
-void	replace_wildcard(t_token *token)
+t_str_arr_heap	get_matched_files(t_token *token)
 {
 	DIR				*dir;
 	t_str_arr_heap	matches;
 
 	if (token->quote != QUOTE_NONE || !includes(token->value, '*'))
-		return ;
+		return (NULL);
 	dir = opendir(".");
 	if (!dir)
-		return ;
+		return (NULL);
 	matches = collect_matches(dir, token->value);
 	closedir(dir);
-	if (!matches[0])
-	{
-		free(matches);
-		return ;
-	}
-	free(token->value);
-	token->value = join_str_arr(matches, " ");
-	free_str_arr(matches);
+	return (matches);
 }
 
 // int main() {

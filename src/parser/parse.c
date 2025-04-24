@@ -12,17 +12,35 @@ static void	convert_dollar_tokens(t_token **tokens)
 	}
 }
 
-static void	convert_wildcard_tokens(t_token **tokens)
+t_token	**convert_wildcard_tokens(t_token **tokens)
 {
-	int	i;
-
+	t_str_arr_heap	matched;
+	int				i;
+	int				j;
 
 	i = 0;
 	while (tokens[i])
 	{
-		replace_wildcard(tokens[i]);
-		i++;
+		matched = get_matched_files(tokens[i]);
+		if (matched && matched[0])
+		{
+			free(tokens[i]->value);
+			tokens[i]->value = ft_strdup(matched[0]);
+			j = 1;
+			while (matched && matched[j])
+			{
+				tokens = insert_token(tokens, create_token(matched[j],
+							TOKEN_WORD, QUOTE_NONE), i + j);
+				j++;
+			}
+			i += j;
+		}
+		else
+			i++;
+		if (matched)
+			free_str_arr(matched);
 	}
+	return (tokens);
 }
 
 t_token	**parse(t_str_heap prompt)
@@ -43,7 +61,7 @@ t_token	**parse(t_str_heap prompt)
 		return (NULL);
 	}
 	convert_dollar_tokens(tokens);
-	convert_wildcard_tokens(tokens);
+	tokens = convert_wildcard_tokens(tokens);
 	return (tokens);
 }
 

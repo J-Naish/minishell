@@ -30,9 +30,9 @@ SRC := src/builtins/cd.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
 		src/parser/replace_dollar_word.c\
-		src/parser/replace_wildcard.c\
 		src/parser/token_utils.c\
 		src/parser/tokenize.c\
+		src/parser/wildcard.c\
 		src/utils/char.c\
 		src/utils/command.c\
 		src/utils/error_handler.c\
