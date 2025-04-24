@@ -1,18 +1,7 @@
 #include "../../include/misc.h"
 
-static bool	match_pattern(char *pattern, char *str)
+static bool	find_matching(char *p, char *s, char *asterisk, char *start)
 {
-	char	*p;
-	char	*s;
-	char	*asterisk;
-	char	*start;
-
-	if (is_same_str(pattern, "*"))
-		return (true);
-	p = pattern;
-	s = str;
-	asterisk = NULL;
-	start = NULL;
 	while (*s)
 	{
 		if (*p == '*')
@@ -38,6 +27,22 @@ static bool	match_pattern(char *pattern, char *str)
 	while (*p == '*')
 		p++;
 	return (*p == '\0');
+}
+
+bool	match_pattern(char *pattern, char *str)
+{
+	char	*p;
+	char	*s;
+	char	*asterisk;
+	char	*start;
+
+	if (is_same_str(pattern, "*"))
+		return (true);
+	p = pattern;
+	s = str;
+	asterisk = NULL;
+	start = NULL;
+	return (find_matching(p, s, asterisk, start));
 }
 
 // int main() {

@@ -2,7 +2,6 @@ NAME := minishell
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 READLINEFLAG := -lreadline
-CFLAGS += $(READLINEFLAG)
 SRC := src/builtins/cd.c\
 		src/builtins/echo.c\
 		src/builtins/env.c\
@@ -70,7 +69,7 @@ all: $(NAME)
 
 $(NAME): $(BUILD)
 	make all -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(BUILD) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(BUILD) $(LIBFT) -o $(NAME) $(READLINEFLAG)
 
 $(BUILD_DIR)/%.o: %.c $(HEADERS)
 	@mkdir -p $(@D)
@@ -88,7 +87,7 @@ re: fclean all
 
 unit-test: $(TEST_SRC)
 	@make all -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) $(TEST_SRC) $(LIBFT)
+	@$(CC) $(CFLAGS) $(TEST_SRC) $(LIBFT) $(READLINEFLAG)
 	@$(LEAK_CHECK) ./a.out
 	@rm -f a.out
 

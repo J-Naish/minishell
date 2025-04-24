@@ -3,4 +3,6 @@
 
 # include "./minishell.h"
 
+bool	match_pattern(char *pattern, char *str);
+
 #endif
