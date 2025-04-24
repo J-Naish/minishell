@@ -12,11 +12,24 @@ static void	convert_dollar_tokens(t_token **tokens)
 	}
 }
 
+static int	process_matched(t_token ***tokens, int pos, t_str_arr_heap matched)
+{
+	int	j;
+
+	j = 1;
+	while (matched && matched[j])
+	{
+		*tokens = insert_token(*tokens, create_token(matched[j],
+					TOKEN_WORD, QUOTE_NONE), pos + j);
+		j++;
+	}
+	return (j);
+}
+
 t_token	**convert_wildcard_tokens(t_token **tokens)
 {
 	t_str_arr_heap	matched;
 	int				i;
-	int				j;
 
 	i = 0;
 	while (tokens[i])
@@ -26,14 +39,7 @@ t_token	**convert_wildcard_tokens(t_token **tokens)
 		{
 			free(tokens[i]->value);
 			tokens[i]->value = ft_strdup(matched[0]);
-			j = 1;
-			while (matched && matched[j])
-			{
-				tokens = insert_token(tokens, create_token(matched[j],
-							TOKEN_WORD, QUOTE_NONE), i + j);
-				j++;
-			}
-			i += j;
+			i += process_matched(&tokens, i, matched);
 		}
 		else
 			i++;
