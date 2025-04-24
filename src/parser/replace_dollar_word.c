@@ -116,7 +116,7 @@ void	replace_dollar_word(t_token *token)
 		i++;
 	}
 	free(token->value);
-	token->value = join_str_arr(splitted);
+	token->value = join_str_arr(splitted, NULL);
 	free_str_arr(splitted);
 }
 

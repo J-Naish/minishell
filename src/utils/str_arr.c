@@ -34,31 +34,37 @@ t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str)
 	return (new);
 }
 
-static int	count_total_len(t_str_arr str_arr)
+static int	total_len(t_str_arr str_arr, t_str connector)
 {
 	int	i;
 	int	length;
+	int	connector_len;
 
 	length = 0;
+	if (connector)
+		connector_len = (int)ft_strlen(connector);
+	else
+		connector_len = 0;
 	i = 0;
 	while (str_arr[i])
 	{
-		length += ft_strlen(str_arr[i]);
+		length += (int)ft_strlen(str_arr[i]);
 		i++;
+		if (str_arr[i])
+			length += connector_len;
 	}
 	return (length);
 }
 
-t_str_heap	join_str_arr(t_str_arr str_arr)
+t_str_heap	join_str_arr(t_str_arr str_arr, t_str connector)
 {
 	int			i;
 	int			j;
+	int			k;
 	int			pos;
-	int			length;
 	t_str_heap	s;
 
-	length = count_total_len(str_arr);
-	s = (t_str_heap)malloc(sizeof(char) * (length + 1));
+	s = (t_str_heap)malloc(sizeof(char) * (total_len(str_arr, connector) + 1));
 	if (!s)
 		return (NULL);
 	i = 0;
@@ -67,12 +73,11 @@ t_str_heap	join_str_arr(t_str_arr str_arr)
 	{
 		j = 0;
 		while (str_arr[i][j])
-		{
-			s[pos] = str_arr[i][j];
-			pos++;
-			j++;
-		}
+			s[pos++] = str_arr[i][j++];
 		i++;
+		k = 0;
+		while (str_arr[i] && connector && connector[k])
+			s[pos++] = connector[k++];
 	}
 	s[pos] = '\0';
 	return (s);
@@ -96,5 +101,10 @@ t_str_heap	join_str_arr(t_str_arr str_arr)
 // 		"!",
 // 		NULL
 // 	};
-// 	ft_putendl_fd(join_str_arr(test), STDOUT_FILENO);
+// 	char *joined = join_str_arr(test, NULL);
+// 	ft_putendl_fd(joined, STDOUT_FILENO);
+// 	free(joined);
+// 	joined = join_str_arr(test, " ");
+// 	ft_putendl_fd(joined, STDOUT_FILENO);
+// 	free(joined);
 // }
