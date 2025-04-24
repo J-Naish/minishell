@@ -59,5 +59,6 @@ bool			is_space(char c);
 bool			is_pipe(t_token *token);
 bool			is_chain(t_token *token);
 bool			is_word(t_token *token);
+t_token			**insert_token(t_token **tokens, t_token *token, int position);
 
 #endif
