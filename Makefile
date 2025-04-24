@@ -27,10 +27,10 @@ SRC := src/builtins/cd.c\
 		src/executor/validate.c\
 		src/misc/initialize_shell.c\
 		src/misc/signal_handler.c\
-		src/misc/wildcard.c\
 		src/parser/helpers.c\
 		src/parser/parse.c\
 		src/parser/replace_dollar_word.c\
+		src/parser/replace_wildcard.c\
 		src/parser/token_utils.c\
 		src/parser/tokenize.c\
 		src/utils/char.c\

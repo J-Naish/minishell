@@ -1,4 +1,4 @@
-#include "../../include/misc.h"
+#include "../../include/parser.h"
 
 static bool	find_matching(char *p, char *s, char *asterisk, char *start)
 {
@@ -29,7 +29,7 @@ static bool	find_matching(char *p, char *s, char *asterisk, char *start)
 	return (*p == '\0');
 }
 
-bool	match_pattern(char *pattern, char *str)
+static bool	match_pattern(char *pattern, char *str)
 {
 	char	*p;
 	char	*s;
@@ -43,6 +43,51 @@ bool	match_pattern(char *pattern, char *str)
 	asterisk = NULL;
 	start = NULL;
 	return (find_matching(p, s, asterisk, start));
+}
+
+static t_str_arr_heap	collect_matches(DIR *dir, t_str pattern)
+{
+	struct dirent	*entry;
+	t_str			filename;
+	t_str_arr_heap	matches;
+
+	matches = init_str_arr();
+	entry = readdir(dir);
+	while (entry)
+	{
+		filename = entry->d_name;
+		if (filename[0] == '.' && pattern[0] != '.')
+		{
+			entry = readdir(dir);
+			continue ;
+		}
+		if (match_pattern(pattern, filename))
+			matches = append_str(matches, filename);
+		entry = readdir(dir);
+	}
+	return (matches);
+}
+
+void	replace_wildcard(t_token *token)
+{
+	DIR				*dir;
+	t_str_arr_heap	matches;
+
+	if (token->quote != QUOTE_NONE || !includes(token->value, '*'))
+		return ;
+	dir = opendir(".");
+	if (!dir)
+		return ;
+	matches = collect_matches(dir, token->value);
+	closedir(dir);
+	if (!matches[0])
+	{
+		free(matches);
+		return ;
+	}
+	free(token->value);
+	token->value = join_str_arr(matches, " ");
+	free_str_arr(matches);
 }
 
 // int main() {

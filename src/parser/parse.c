@@ -12,24 +12,38 @@ static void	convert_dollar_tokens(t_token **tokens)
 	}
 }
 
+static void	convert_wildcard_tokens(t_token **tokens)
+{
+	int	i;
+
+
+	i = 0;
+	while (tokens[i])
+	{
+		replace_wildcard(tokens[i]);
+		i++;
+	}
+}
+
 t_token	**parse(t_str_heap prompt)
 {
 	t_token	**tokens;
 
 	if (has_invalid_quote(prompt))
 	{
-		ft_putstr_fd("invalid quote\n", STDERR_FILENO);
+		put_error(SHELL_NAME": invalid quote\n");
 		// g_signal.status = 1;
 		return (NULL);
 	}
 	tokens = tokenize(prompt);
 	if (!tokens)
 	{
-		ft_putstr_fd("memory allocation error\n", STDERR_FILENO);
+		put_error(SHELL_NAME": memory allocation error\n");
 		// g_signal.status = 1;
 		return (NULL);
 	}
 	convert_dollar_tokens(tokens);
+	convert_wildcard_tokens(tokens);
 	return (tokens);
 }
 

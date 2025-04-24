@@ -7,6 +7,8 @@ bool			has_invalid_quote(t_str_heap prompt);
 int				next_quote_index(t_str_heap prompt, char quote);
 int				next_index(t_str_heap prompt);
 
+void			replace_wildcard(t_token *token);
+
 void			replace_dollar_word(t_token *token);
 
 t_token			**parse(t_str_heap prompt);
