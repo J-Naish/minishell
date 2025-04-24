@@ -24,6 +24,7 @@
 # include "./constants.h"
 # include "./debugger.h"
 # include "./executor.h"
+# include "./misc.h"
 # include "./parser.h"
 # include "./utils.h"
 
