@@ -5,6 +5,7 @@ t_signal	g_signal;
 static void	init_signal(void)
 {
 	g_signal.status = 0;
+	setup_signals();
 }
 
 static void	call_args(int argc, char **argv)
@@ -15,13 +16,14 @@ static void	call_args(int argc, char **argv)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_str_heap	prompt;
-	t_token		**tokens;
-	t_pipeline	**pipelines;
+	t_str_heap		prompt;
+	t_token			**tokens;
+	t_pipeline		**pipelines;
+	t_str_arr_heap	local_env;
 
 	call_args(argc, argv);
 	init_signal();
-	setup_signals();
+	local_env = dup_str_arr(envp);
 	while (1)
 	{
 		prompt = readline(SHELL_NAME"$ ");
@@ -48,9 +50,10 @@ int	main(int argc, char **argv, char **envp)
 		pipelines = build_pipeline(tokens);
 		free_tokens(tokens);
 		free(prompt);
-		execute(pipelines, envp);
+		execute(pipelines, local_env);
 		rl_on_new_line();
 		free_pipelines(pipelines);
 	}
+	free_str_arr(local_env);
 	return (EXIT_SUCCESS);
 }
