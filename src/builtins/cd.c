@@ -9,7 +9,10 @@ void	cmd_cd(t_command *command)
 	{
 		env_home = getenv("HOME");
 		if (!env_home)
+		{
 			put_error(SHELL_NAME": path is unset\n");
+			return ;
+		}
 		if (ft_strlen(command->args[1]) > 1)
 			target_dir = ft_strjoin(env_home, &command->args[1][1]);
 		else
