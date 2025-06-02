@@ -34,6 +34,33 @@ t_str_arr_heap	append_str(t_str_arr_heap str_arr, t_str str)
 	return (new);
 }
 
+t_str_arr_heap	dup_str_arr(t_str_arr original)
+{
+	int				size;
+	int				i;
+	t_str_arr_heap	copy;
+
+	size = 0;
+	while (original[size])
+		size++;
+	copy = (t_str_arr_heap)malloc(sizeof(t_str *) * (size + 1));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (original[i])
+	{
+		copy[i] = ft_strdup(original[i]);
+		if (!copy[i])
+		{
+			free_str_arr(copy);
+			return (NULL);
+		}
+		i++;
+	}
+	copy[i] = NULL;
+	return (copy);
+}
+
 static int	total_len(t_str_arr str_arr, t_str connector)
 {
 	int	i;
