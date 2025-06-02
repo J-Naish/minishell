@@ -2,6 +2,11 @@ NAME := minishell
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 READLINEFLAG := -lreadline
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Darwin)
+	CFLAGS += -I/opt/homebrew/opt/readline/include
+	READLINEFLAG += -L/opt/homebrew/opt/readline/lib
+endif
 SRC := src/builtins/cd.c\
 		src/builtins/echo.c\
 		src/builtins/env.c\
@@ -55,7 +60,6 @@ BUILD_DIR := build
 BUILD := $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))
 LIBFT_DIR := libft
 LIBFT := ./$(LIBFT_DIR)/libft.a
-UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
 	LEAK_CHECK = valgrind --leak-check=full --show-leak-kinds=all
 endif

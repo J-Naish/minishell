@@ -6,7 +6,7 @@ static void	signal_handler(int signum)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 		// g_signal.status = EXIT_SIGNAL_BASE + SIGINT;
 	}
