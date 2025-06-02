@@ -1,6 +1,6 @@
 #include "../../include/misc.h"
 
-static void	signal_handler(int signum)
+static void	interactive_signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
@@ -16,11 +16,36 @@ static void	signal_handler(int signum)
 	}
 }
 
+static void	execution_signal_handler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		g_signal.status = EXIT_SIGNAL_BASE + SIGINT;
+	}
+	else if (signum == SIGQUIT)
+	{
+		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
+		g_signal.status = EXIT_SIGNAL_BASE + SIGQUIT;
+	}
+}
+
 void	setup_signals(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = signal_handler;
+	sa.sa_handler = interactive_signal_handler;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+}
+
+void	setup_execution_signals(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = execution_signal_handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);

@@ -5,6 +5,7 @@
 
 void	initialize_shell(void);
 
-void	setup_signals(void);;
+void	setup_signals(void);
+void	setup_execution_signals(void);
 
 #endif

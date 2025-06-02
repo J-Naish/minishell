@@ -102,6 +102,7 @@ void	execute(t_pipeline **pipelines, char **envp)
 	bool				should_execute;
 	t_chain_operator	prev_op;
 
+	setup_execution_signals();
 	process_all_heredoc(pipelines);
 	i = 0;
 	last_status = 0;
@@ -120,5 +121,6 @@ void	execute(t_pipeline **pipelines, char **envp)
 			last_status = execute_pipeline(pipelines[i], envp);
 		i++;
 	}
+	setup_signals();
 	// g_signal.status = last_status;
 }
