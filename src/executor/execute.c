@@ -1,6 +1,6 @@
 #include "../../include/executor.h"
 
-static int	execute_pipeline(t_pipeline *pipeline, char **envp)
+static int	execute_pipeline(t_pipeline *pipeline, char ***envpp)
 {
 	int		i;
 	int		pipe_fds[2][2];
@@ -15,7 +15,7 @@ static int	execute_pipeline(t_pipeline *pipeline, char **envp)
 	{
 		if (is_same_str(pipeline->commands[0]->args[0], "exit"))
 			cmd_exit(pipeline->commands[0]);
-		run_command(pipeline->commands[0], envp);
+		run_command(pipeline->commands[0], envpp);
 		return (EXIT_SUCCESS);
 	}
 	active_pipe = 0;
@@ -51,7 +51,7 @@ static int	execute_pipeline(t_pipeline *pipeline, char **envp)
 				close(pipe_fds[active_pipe][0]);
 				close(pipe_fds[active_pipe][1]);
 			}
-			run_command(pipeline->commands[i], envp);
+			run_command(pipeline->commands[i], envpp);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -95,7 +95,7 @@ static void	process_all_heredoc(t_pipeline **pipelines)
 	}
 }
 
-void	execute(t_pipeline **pipelines, char **envp)
+void	execute(t_pipeline **pipelines, char ***envpp)
 {
 	int					i;
 	int					last_status;
@@ -118,7 +118,7 @@ void	execute(t_pipeline **pipelines, char **envp)
 				should_execute = false;
 		}
 		if (should_execute)
-			last_status = execute_pipeline(pipelines[i], envp);
+			last_status = execute_pipeline(pipelines[i], envpp);
 		i++;
 	}
 	setup_signals();

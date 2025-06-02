@@ -1,6 +1,6 @@
 #include "../../include/builtins.h"
 
-void	cmd_env(t_command *command, char **envp)
+void	cmd_env(t_command *command, char ***envpp)
 {
 	int	i;
 
@@ -10,9 +10,9 @@ void	cmd_env(t_command *command, char **envp)
 		return ;
 	}
 	i = 0;
-	while (envp[i])
+	while ((*envpp)[i])
 	{
-		ft_putendl_fd(envp[i], STDOUT_FILENO);
+		ft_putendl_fd((*envpp)[i], STDOUT_FILENO);
 		i++;
 	}
 }

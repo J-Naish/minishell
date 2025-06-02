@@ -7,11 +7,11 @@ void	cmd_cd(t_command *command);
 
 void	cmd_echo(t_command *command);
 
-void	cmd_env(t_command *command, char **envp);
+void	cmd_env(t_command *command, char ***envpp);
 
 void	cmd_exit(t_command *command);
 
-void	cmd_export(t_command *command);
+void	cmd_export(t_command *command, char ***envpp);
 
 void	cmd_pwd(t_command *command);
 

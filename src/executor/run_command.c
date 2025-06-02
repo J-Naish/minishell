@@ -1,6 +1,6 @@
 #include "../../include/executor.h"
 
-void	run_builtin_command(t_command *command, char **envp)
+static void	run_builtin_command(t_command *command, char ***envpp)
 {
 	char	*cmd_name;
 
@@ -12,11 +12,11 @@ void	run_builtin_command(t_command *command, char **envp)
 	else if (is_same_str(cmd_name, "pwd"))
 		cmd_pwd(command);
 	else if (is_same_str(cmd_name, "export"))
-		cmd_export(command);
+		cmd_export(command, envpp);
 	else if (is_same_str(cmd_name, "unset"))
 		cmd_unset(command);
 	else if (is_same_str(cmd_name, "env"))
-		cmd_env(command, envp);
+		cmd_env(command, envpp);
 	else if (is_same_str(cmd_name, "exit"))
 		cmd_exit(command);
 }
@@ -61,14 +61,14 @@ static t_str_heap	find_command_path(t_command *command)
 	return (free_str_arr(paths), NULL);
 }
 
-static void	run_external_command(t_command *command, char **envp)
+static void	run_external_command(t_command *command, char ***envpp)
 {
 	t_str_heap	cmd_path;
 
 	cmd_path = find_command_path(command);
 	if (!cmd_path)
 		command_not_found(get_cmd_name(command));
-	execve(cmd_path, command->args, envp);
+	execve(cmd_path, command->args, *envpp);
 	put_error(SHELL_NAME": ");
 	put_error(cmd_path);
 	put_error(": ");
@@ -80,7 +80,7 @@ static void	run_external_command(t_command *command, char **envp)
 		exit(EXIT_NOT_FOUND);
 }
 
-void	run_command(t_command *command, char **envp)
+void	run_command(t_command *command, char ***envpp)
 {
 	int		saved_fds[2];
 
@@ -94,9 +94,9 @@ void	run_command(t_command *command, char **envp)
 		}
 	}
 	if (is_builtin_cmd(command))
-		run_builtin_command(command, envp);
+		run_builtin_command(command, envpp);
 	else
-		run_external_command(command, envp);
+		run_external_command(command, envpp);
 	if (command->is_redirect)
 		restore_std_fds(saved_fds);
 }
