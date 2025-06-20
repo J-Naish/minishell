@@ -42,8 +42,21 @@ static void	add_env(char *new_env, char ***envpp)
 	*envpp = new;
 }
 
+// 
 void	cmd_export(t_command *command, char ***envpp)
 {
+	if (!command->args[1])
+	{
+		put_error(SHELL_NAME": not enough arg");
+		return ;
+	}
+	if (!includes(command->args[1], '='))
+		return ;
+	if (!is_valid_format(command->args[1]))
+	{
+		put_error(SHELL_NAME": not a valid identifier");
+		return ;
+	}
 	if (env_key_exists(command->args[1], *envpp))
 		replace_env(command->args[1], envpp);
 	else
