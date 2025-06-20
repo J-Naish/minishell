@@ -1,14 +1,23 @@
 #include "../../include/builtins.h"
 
-// static bool	is_valid_format(char *str)
-// {
+static void	replace_env(char *new_env, char ***envpp)
+{
+	int			i;
+	t_str_heap	new;
 
-// }
-
-// static void	replace_env(char *new_env, char ***envpp)
-// {
-
-// }
+	i = 0;
+	while ((*envpp)[i])
+	{
+		if (is_same_key(new_env, (*envpp)[i]))
+		{
+			new = ft_strdup(new_env);
+			free((*envpp)[i]);
+			(*envpp)[i] = new;
+			return ;
+		}
+		i++;
+	}
+}
 
 static void	add_env(char *new_env, char ***envpp)
 {
@@ -35,5 +44,8 @@ static void	add_env(char *new_env, char ***envpp)
 
 void	cmd_export(t_command *command, char ***envpp)
 {
-	add_env(command->args[1], envpp);
+	if (env_key_exists(command->args[1], *envpp))
+		replace_env(command->args[1], envpp);
+	else
+		add_env(command->args[1], envpp);
 }
