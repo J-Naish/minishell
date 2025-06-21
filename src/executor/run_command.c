@@ -14,7 +14,7 @@ static void	run_builtin_command(t_command *command, char ***envpp)
 	else if (is_same_str(cmd_name, "export"))
 		cmd_export(command, envpp);
 	else if (is_same_str(cmd_name, "unset"))
-		cmd_unset(command);
+		cmd_unset(command, envpp);
 	else if (is_same_str(cmd_name, "env"))
 		cmd_env(command, envpp);
 	else if (is_same_str(cmd_name, "exit"))
