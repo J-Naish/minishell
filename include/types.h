@@ -62,4 +62,18 @@ typedef struct s_pipeline
 	t_chain_operator	operator;
 }	t_pipeline;
 
+typedef struct s_pipe_context
+{
+	int	pipe_fds[2][2];
+	int	active_pipe;
+	int	command_index;
+}	t_pipe_context;
+
+typedef struct s_process_context
+{
+	t_pipe_context	*pipe_ctx;
+	t_pipeline		*pipeline;
+	char			***envpp;
+}	t_process_context;
+
 #endif

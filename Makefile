@@ -26,7 +26,9 @@ SRC := src/builtins/cd.c\
 		src/executor/command_utils.c\
 		src/executor/execute.c\
 		src/executor/heredoc.c\
-		src/executor/pipeline_utils.c\
+		src/executor/pipeline_builder.c\
+		src/executor/pipeline.c\
+		src/executor/pipeline_execution.c\
 		src/executor/redirect.c\
 		src/executor/run_command.c\
 		src/executor/validate.c\
@@ -47,6 +49,9 @@ SRC := src/builtins/cd.c\
 		src/utils/str_arr.c\
 		src/utils/string.c\
 		src/utils/token.c\
+		src/shell_init.c\
+		src/shell_prompt.c\
+		src/shell_parse.c\
 		src/main.c
 HEADERS := include/builtins.h\
 			include/constants.h\

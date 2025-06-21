@@ -25,4 +25,15 @@ void		run_command(t_command *command, char ***envpp);
 
 bool		validate_tokens(t_token **tokens);
 
+int			handle_single_builtin(t_pipeline *pipeline, char ***envpp);
+void		create_pipe_if_needed(t_pipe_context *ctx, t_command **commands);
+pid_t		fork_process(void);
+void		execute_command_loop(t_pipeline *pipeline, char ***envpp, 
+				pid_t *last_pid);
+int			execute_pipeline(t_pipeline *pipeline, char ***envpp);
+void		handle_child_process(t_process_context *proc_ctx);
+void		handle_parent_process(t_pipe_context *ctx, pid_t pid, 
+				pid_t *last_pid, t_command **commands);
+int			wait_for_pipeline(pid_t last_pid);
+
 #endif

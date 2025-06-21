@@ -30,4 +30,10 @@
 
 extern t_signal	g_signal;
 
+t_str_arr_heap	init_shell(int argc, char **argv, char **envp);
+t_str_heap		read_and_validate_prompt(void);
+t_token			**parse_and_validate(t_str_heap prompt, t_str_arr_heap local_env);
+void			execute_pipeline_cycle(t_token **tokens, t_str_arr_heap *local_env);
+void			init_signal(void);
+
 #endif
