@@ -10,10 +10,6 @@ static void	interactive_signal_handler(int signum)
 		rl_redisplay();
 		g_signal.status = EXIT_SIGNAL_BASE + SIGINT;
 	}
-	else if (signum == SIGQUIT)
-	{
-		rl_redisplay();
-	}
 }
 
 static void	execution_signal_handler(int signum)
@@ -38,7 +34,7 @@ void	setup_signals(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	setup_execution_signals(void)
