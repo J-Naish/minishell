@@ -87,3 +87,21 @@ bool	is_valid_format(char *new_env)
 	}
 	return (free(key), true);
 }
+
+char	*get_env_value(char *key, char **envpp)
+{
+	int	i;
+	int	key_len;
+
+	if (!key || !envpp)
+		return (NULL);
+	key_len = ft_strlen(key);
+	i = 0;
+	while (envpp[i])
+	{
+		if (ft_strncmp(envpp[i], key, key_len) == 0 && envpp[i][key_len] == '=')
+			return (&envpp[i][key_len + 1]);
+		i++;
+	}
+	return (NULL);
+}

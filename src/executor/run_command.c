@@ -32,7 +32,7 @@ static t_str_heap	join_path(t_str dir, t_str cmd)
 	return (full_path);
 }
 
-static t_str_heap	find_command_path(t_command *command)
+static t_str_heap	find_command_path(t_command *command, char ***envpp)
 {
 	t_str_heap		full_path;
 	t_str_arr_heap	paths;
@@ -43,7 +43,7 @@ static t_str_heap	find_command_path(t_command *command)
 	cmd = get_cmd_name(command);
 	if (ft_strchr(cmd, '/') || ft_strchr(cmd, '.'))
 		return (ft_strdup(cmd));
-	env_path = getenv("PATH");
+	env_path = get_env_value("PATH", *envpp);
 	if (!env_path)
 		return (NULL);
 	paths = ft_split(env_path, ':');
@@ -65,7 +65,7 @@ static void	run_external_command(t_command *command, char ***envpp)
 {
 	t_str_heap	cmd_path;
 
-	cmd_path = find_command_path(command);
+	cmd_path = find_command_path(command, envpp);
 	if (!cmd_path)
 		command_not_found(get_cmd_name(command));
 	execve(cmd_path, command->args, *envpp);

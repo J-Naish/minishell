@@ -14,6 +14,7 @@ void	cmd_exit(t_command *command);
 bool	is_same_key(char *new_env, char *env);
 bool	env_key_exists(char *new_env, char **envp);
 bool	is_valid_format(char *new_env);
+char	*get_env_value(char *key, char **envpp);
 void	cmd_export(t_command *command, char ***envpp);
 
 void	cmd_pwd(t_command *command);
