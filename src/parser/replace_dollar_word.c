@@ -85,7 +85,6 @@ static void	convert_dollar_word(t_str_heap *word)
 	if (is_same_str(*word, "$?"))
 	{
 		new = ft_itoa(g_signal.status);
-		new = ft_itoa(0);
 	}
 	else if (starts_with(*word, "$") && ft_strlen(*word) > 1)
 	{
