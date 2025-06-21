@@ -57,6 +57,8 @@ bool			is_special_char(char c);
  */
 bool			is_space(char c);
 
+bool			is_whitespace_only(const char *str);
+
 bool			is_pipe(t_token *token);
 bool			is_chain(t_token *token);
 bool			is_word(t_token *token);

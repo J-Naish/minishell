@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			exit(EXIT_SUCCESS);
 		}
-		if (!*prompt)
+		if (!*prompt || is_whitespace_only(prompt))
 		{
 			free(prompt);
 			continue ;

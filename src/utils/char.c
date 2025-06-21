@@ -10,6 +10,7 @@ bool	is_space(char c)
 	return (c == ' ' || (c >= 9 && c <= 13));
 }
 
+
 // int main() {
 // 	print_bool((is_special_char('|')));
 // 	print_bool((is_special_char('&')));

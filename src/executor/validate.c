@@ -23,6 +23,8 @@ static bool	end_with_word(t_token **tokens)
 	i = 0;
 	while (tokens[i])
 		i++;
+	if (i == 0)
+		return (false);
 	if (is_word(tokens[i - 1]))
 		return (true);
 	else

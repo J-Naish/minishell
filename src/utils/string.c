@@ -33,6 +33,20 @@ bool	includes(const char *s, char c)
 		return (false);
 }
 
+bool	is_whitespace_only(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!is_space(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 // int main() {
 // 	print_bool((is_same_str("test", "test")));
 // 	print_bool((is_same_str("test1", "test")));
