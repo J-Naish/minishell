@@ -1,17 +1,14 @@
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
 
-// buffer size for get_next_line
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 256
 # endif
 
-// shell name
 # ifndef SHELL_NAME
 #  define SHELL_NAME "minishell"
 # endif
 
-// exit statuses
 # ifndef EXIT_UNABLE_TO_EXECUTE
 #  define EXIT_UNABLE_TO_EXECUTE 126
 # endif
@@ -28,7 +25,6 @@
 #  define EXIT_INVALID_ARGS 255
 # endif
 
-// log styles
 # ifndef RED
 #  define RED "\033[31m"
 # endif
