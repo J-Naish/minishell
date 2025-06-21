@@ -3,7 +3,7 @@
 
 # include "./minishell.h"
 
-void	cmd_cd(t_command *command);
+void	cmd_cd(t_command *command, char ***envpp);
 
 void	cmd_echo(t_command *command);
 

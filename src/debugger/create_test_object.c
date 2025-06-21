@@ -2,7 +2,7 @@
 
 t_token	**create_test_tokens(t_str prompt)
 {
-	return (parse(prompt));
+	return (parse(prompt,));
 }
 
 t_pipeline	**create_test_pipelines(t_str prompt)

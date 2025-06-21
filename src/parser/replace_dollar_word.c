@@ -77,7 +77,7 @@ static t_str_arr_heap	split_words(t_str s)
 	return (chunks);
 }
 
-static void	convert_dollar_word(t_str_heap *word)
+static void	convert_dollar_word(t_str_heap *word, char **envp)
 {
 	t_str		env_var;
 	t_str_heap	new;
@@ -88,7 +88,7 @@ static void	convert_dollar_word(t_str_heap *word)
 	}
 	else if (starts_with(*word, "$") && ft_strlen(*word) > 1)
 	{
-		env_var = getenv((*word) + 1);
+		env_var = get_env_value((*word) + 1, envp);
 		if (env_var)
 			new = ft_strdup(env_var);
 		else
@@ -100,7 +100,7 @@ static void	convert_dollar_word(t_str_heap *word)
 	*word = new;
 }
 
-void	replace_dollar_word(t_token *token)
+void	replace_dollar_word(t_token *token, char **envp)
 {
 	t_str_arr_heap	splitted;
 	int				i;
@@ -111,7 +111,7 @@ void	replace_dollar_word(t_token *token)
 	i = 0;
 	while (splitted[i])
 	{
-		convert_dollar_word(&splitted[i]);
+		convert_dollar_word(&splitted[i], envp);
 		i++;
 	}
 	free(token->value);

@@ -8,7 +8,7 @@ static void	run_builtin_command(t_command *command, char ***envpp)
 	if (is_same_str(cmd_name, "echo"))
 		cmd_echo(command);
 	else if (is_same_str(cmd_name, "cd"))
-		cmd_cd(command);
+		cmd_cd(command, envpp);
 	else if (is_same_str(cmd_name, "pwd"))
 		cmd_pwd(command);
 	else if (is_same_str(cmd_name, "export"))

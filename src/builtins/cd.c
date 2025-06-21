@@ -1,13 +1,13 @@
 #include "../../include/builtins.h"
 
-void	cmd_cd(t_command *command)
+void	cmd_cd(t_command *command, char ***envpp)
 {
 	t_str_heap	target_dir;
 	t_str		env_home;
 
 	if (command->args[1] && starts_with(command->args[1], "~"))
 	{
-		env_home = getenv("HOME");
+		env_home = get_env_value("HOME", *envpp);
 		if (!env_home)
 		{
 			put_error(SHELL_NAME": path is unset\n");
@@ -19,7 +19,15 @@ void	cmd_cd(t_command *command)
 			target_dir = ft_strdup(env_home);
 	}
 	else if (!command->args[1])
-		target_dir = ft_strdup(getenv("HOME"));
+	{
+		env_home = get_env_value("HOME", *envpp);
+		if (!env_home)
+		{
+			put_error(SHELL_NAME": path is unset\n");
+			return ;
+		}
+		target_dir = ft_strdup(env_home);
+	}
 	else
 		target_dir = ft_strdup(command->args[1]);
 	if (chdir(target_dir) == -1)

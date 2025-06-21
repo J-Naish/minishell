@@ -1,13 +1,13 @@
 #include "../../include/parser.h"
 
-static void	convert_dollar_tokens(t_token **tokens)
+static void	convert_dollar_tokens(t_token **tokens, char **envp)
 {
 	int	i;
 
 	i = 0;
 	while (tokens[i])
 	{
-		replace_dollar_word(tokens[i]);
+		replace_dollar_word(tokens[i], envp);
 		i++;
 	}
 }
@@ -49,7 +49,7 @@ t_token	**convert_wildcard_tokens(t_token **tokens)
 	return (tokens);
 }
 
-t_token	**parse(t_str_heap prompt)
+t_token	**parse(t_str_heap prompt, char **envp)
 {
 	t_token	**tokens;
 
@@ -66,7 +66,7 @@ t_token	**parse(t_str_heap prompt)
 		g_signal.status = 1;
 		return (NULL);
 	}
-	convert_dollar_tokens(tokens);
+	convert_dollar_tokens(tokens, envp);
 	tokens = convert_wildcard_tokens(tokens);
 	return (tokens);
 }

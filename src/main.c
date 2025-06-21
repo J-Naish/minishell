@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		add_history(prompt);
-		tokens = parse(prompt);
+		tokens = parse(prompt, local_env);
 		if (!validate_tokens(tokens))
 		{
 			if (tokens)

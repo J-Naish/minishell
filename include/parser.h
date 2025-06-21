@@ -9,9 +9,9 @@ int				next_index(t_str_heap prompt);
 
 t_str_arr_heap	get_matched_files(t_token *token);
 
-void			replace_dollar_word(t_token *token);
+void			replace_dollar_word(t_token *token, char **envp);
 
-t_token			**parse(t_str_heap prompt);
+t_token			**parse(t_str_heap prompt, char **envp);
 
 t_token			**tokenize(t_str_heap prompt);
 
