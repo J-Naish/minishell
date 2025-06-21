@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipeline.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nash <nash@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/21 18:53:08 by nash              #+#    #+#             */
+/*   Updated: 2025/06/21 18:55:28 by nash             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/executor.h"
 
 static void	setup_child_pipes(t_pipe_context *ctx)
@@ -32,7 +44,7 @@ void	handle_child_process(t_process_context *proc_ctx)
 	exit(EXIT_FAILURE);
 }
 
-void	handle_parent_process(t_pipe_context *ctx, pid_t pid, 
+void	handle_parent_process(t_pipe_context *ctx, pid_t pid,
 							pid_t *last_pid, t_command **commands)
 {
 	int	prev_pipe;
