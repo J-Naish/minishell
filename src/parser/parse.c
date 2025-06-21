@@ -56,14 +56,14 @@ t_token	**parse(t_str_heap prompt)
 	if (has_invalid_quote(prompt))
 	{
 		put_error(SHELL_NAME": invalid quote\n");
-		// g_signal.status = 1;
+		g_signal.status = 1;
 		return (NULL);
 	}
 	tokens = tokenize(prompt);
 	if (!tokens)
 	{
 		put_error(SHELL_NAME": memory allocation error\n");
-		// g_signal.status = 1;
+		g_signal.status = 1;
 		return (NULL);
 	}
 	convert_dollar_tokens(tokens);
